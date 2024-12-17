@@ -1,0 +1,254 @@
+/* About section *****************************/
+
+.about-section {
+  margin-top: 7%;
+  width: 100%;
+  background-color: #fff; /* Set background color as needed */
+}
+
+.about_title {
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 104px;
+  text-align: center;
+  color: #f57d20;
+}
+.p_about {
+  font-size: 21px;
+  font-weight: 500;
+  line-height: 48px;
+  text-align: center;
+}
+/* End about section *****************************/
+/* Home box */
+.margin_section {
+  margin-top: 3%;
+}
+.home_box {
+  background-color: #833988;
+  border-radius: 22px;
+
+  padding: 20px;
+  width: 100%; /* Adjust width as needed */
+  max-width: 1300px; /* Max width to limit on larger screens */
+}
+.h_home_box {
+  color: #fff;
+  line-height: 70px;
+}
+.p_home_box {
+  color: #fff;
+  line-height: 28px;
+  font-size: 18px;
+}
+.click_here_btn {
+  color: #a767ac;
+  border-radius: 17px;
+}
+.click_here_btn:hover {
+  background-color: #c57cca;
+}
+/* End Home box ********************/
+/* FAQ section **********************/
+
+details div {
+  border-bottom: 1px solid #eaecf0;
+  padding: 1.5em;
+  text-align: right;
+  color: #833988;
+}
+
+details + details {
+  margin-top: 0.5rem;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+summary {
+  padding: 0.75em 2em;
+  cursor: pointer;
+  position: relative;
+  padding-left: calc(1.75rem + 0.75rem + 0.75rem);
+  text-align: right;
+  list-style: none;
+  color: #833988;
+}
+
+summary:before {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 98%;
+  content: "+";
+  width: 1.75rem;
+  height: 1.75rem;
+  border: #833988 1px solid;
+  border-radius: 15px;
+  color: #833988;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+details[open] summary:before {
+  content: "-";
+}
+.faq {
+  color: #f57d20;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 4vh;
+  margin-top: 4vh;
+}
+
+/* End FAQ section **********************/
+/* comment & opininos */
+.cont_comment {
+  background-color: #833988;
+  margin-right: 25px;
+  padding: 15px;
+  border-radius: 8px;
+  width: 300px; /* Fixed width */
+  height: 200px; /* Fixed height */
+  box-sizing: border-box;
+  display: flex; /* Make it a flex container */
+  flex-direction: column; /* Stack children vertically */
+}
+
+.card-body {
+  flex: 1; /* Allow card-body to grow and take up available space */
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  justify-content: space-between; /* Push details_account to the bottom */
+}
+
+.comment {
+  font-size: 14px;
+  color: white;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 3;/* Prevent text from wrapping */
+}
+
+.details_account {
+  display: flex;
+  align-items: right; /* Center items vertically */
+  justify-content: right; /* Space items apart */
+  margin-top: auto; /* Push details_account to the bottom of card-body */
+}
+
+.info_account p {
+  margin: 0;
+  color: white;
+  font-size: 13px;
+}
+
+.account_img {
+  width: 40px; /* Adjust size of image */
+  height: 40px; /* Ensure aspect ratio */
+  object-fit: cover; /* Ensure image covers its container */
+}
+
+
+.margin_section .slick-dots li.slick-active button:before {
+  font-size: 15px;
+}
+
+.margin_section .slick-dots li button:before {
+  font-size: 15px;
+}
+.margin_section .slick-dots {
+  bottom: -40px;
+  color: #f57d20;
+}
+.margin_section .slick-dots li.slick-active button:before {
+  color: #f57d20;
+}
+.margin_section .slick-dots li button:before {
+  color: #f57d20;
+}
+.test{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+}
+.slider-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.card-item {
+    margin: 0 15px; 
+    width: 100%; 
+    max-width: 500px; 
+  }
+  
+/* End comment & opininos */
+@media screen and (max-width: 1440px) {
+  
+  .about-section {
+    margin-top: 13em;
+  }
+  .about_title {
+    font-size: 38px;
+  }
+  .p_about {
+    font-size: 19px;
+  }
+
+}
+@media screen and (max-width: 992px) {
+  .overlay-content p {
+    font-size: 18px;
+  }
+  .slider_box {
+    bottom: auto;
+  }
+
+  .about-section {
+    margin-top: 30em;
+  }
+
+  .about_title {
+    font-size: 40px;
+  }
+  .p_about {
+    font-size: 15px;
+    line-height: 40px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .overlay-content p {
+    font-size: 15px;
+  }
+  .slider_box {
+    bottom: auto;
+  }
+
+  .p_box_slider {
+    line-height: 23px;
+  }
+  .about-section {
+    margin-top: 38em;
+  }
+  .about_title {
+    font-size: 35px;
+  }
+  .p_about {
+    font-size: 14px;
+  }
+  .p_home_box {
+    font-size: 14px;
+  }
+  summary:before {
+    left: 94%;
+
+  }
+}

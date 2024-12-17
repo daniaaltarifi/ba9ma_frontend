@@ -1,0 +1,27 @@
+.description_of_steps_who{
+    color: #fff;
+    font-size: 15px ;
+    font-weight: 500;
+    line-height: 28px;
+padding-right: 10px;
+}
+.paragraph_who{
+font-weight: 500;
+line-height: 48px;
+    font-size: 25px;
+    color: #833988;
+    text-align: center;
+}
+
+.about_img{
+    height: 350px;
+    width: 80%;
+    border-radius: 20px;
+    object-fit: contain;
+}
+@media screen and (max-width:768px) {
+    .paragraph_who{
+        font-size: 15px;
+        line-height: 25px;
+    }
+}

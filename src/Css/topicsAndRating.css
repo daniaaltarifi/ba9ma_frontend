@@ -1,0 +1,83 @@
+.topic_list_tabs_cont{
+    background-color: #fff;
+    border-radius: 10px;
+    margin: 1vh;
+    /* height: 43px; */
+    width: 100%;
+    list-style-type: none;
+}
+.show_video_btn{
+    width: 100px;
+    height: 36px;
+    border-radius: 20px;
+    background-color: #833988;
+    border: none;
+    color: #fff;
+    font-size: 14px;
+}
+
+.heading {
+    font-size: 25px;
+    margin-right: 25px;
+  }
+  
+  .fa {
+    font-size: 25px;
+  }
+  
+  .checked {
+    color: #F6B40A;
+   
+  }
+  
+  /* Three column layout */
+  .side_rating {
+    float: left;
+    width: 15%;
+    margin-top:10px;
+  }
+  .percentage_cont{
+    width: 13%;
+    margin-top:6px;
+  }
+  .middle {
+    margin-top:10px;
+    float: left;
+    width: 70%;
+  }
+  .percentage_rating{
+    font-size: 16px;
+    font-weight: 4000;
+    line-height: 27px;
+  }
+
+  
+  /* The bar container */
+  .bar-container {
+    width: 100%;
+    background-color: #EAEAEA;
+    text-align: center;
+    color: white;
+  }
+  
+  /* Individual bars */
+ 
+  .bar-1 {width: 4%; height: 12px; background-color: #F6B40A;}
+ 
+  .total_rating{
+        font-size: 36px;
+    font-weight: 700;
+    line-height: 46px;
+    /* text-align: center; */
+
+  }
+  /* Responsive layout - make the columns stack on top of each other instead of next to each other */
+  @media (max-width: 768px) {
+    .side_rating, .middle {
+      width: 100%;
+    }
+    .percentage_cont{
+      width: 100%;
+      margin-top:6px;
+    }
+  }

@@ -1,0 +1,47 @@
+
+.footer_cont{
+    background-color: #833988;
+    /* height: 50vh; */
+padding: 5vh;
+margin-top: 12vh;
+}
+.arrow_btn{
+    background-color: #f57d20;
+    border-radius: 50px;
+    position: fixed;
+    bottom: 35px; /* Adjust this value as needed */
+    left: 25px; /* Adjust this value to position it on the left */
+
+    z-index: 1000; /* Ensure the button stays above other content */
+}
+.arrow_btn:hover{
+    background-color: #d67e3b;
+}
+.footer_link{
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+
+}
+.footer_link:hover{
+    color: #f57d20;
+}
+.ba9ma_footer{
+    height: 15vh;
+    width: 13vh;
+}
+.copywrite{
+    color: #fff;
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 45px;
+}
+  
+  .social_icon_footer {
+    transition: color 0.3s ease, transform 0.3s ease; 
+  }
+  
+  .social_icon_footer:hover {
+    color: #F57D20; /* Color on hover (you can choose any color) */
+    transform: scale(1.2); /* Slightly enlarge the icon on hover */
+  }

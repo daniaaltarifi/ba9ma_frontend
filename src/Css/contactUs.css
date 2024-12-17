@@ -1,0 +1,48 @@
+.desc_contac{
+    font-size: 23px;
+    font-weight: 500;
+    line-height: 28px;
+    color: #833988;
+}
+
+.icon_cont_contact{
+    background-color: #eee;
+    border-radius: 10px;
+height: 50px;
+}
+.icon_contact{
+    height: 50px;
+    width: 50px;
+    padding: 1vh;
+}
+.contact_info{
+    font-size: 13px;
+    padding-right: 1vh;
+    text-decoration: none;
+    color: #000;
+}
+.cont_all_contact{
+    display: flex;
+    justify-content: space-around;
+}
+.cont_contact{
+    display: flex;
+    justify-content: space-around;
+    /* align-items: center; */
+}
+.email_cont{
+    padding-right: 80px;
+}
+.location_maps_contact{
+    border-radius: 15px;
+    width: 100%;
+    height: 450px;
+}
+@media screen and (max-width: 1265px) {
+    .location_maps_contact{
+height: 250px;
+    }
+    .email_cont{
+        padding-right: 0;
+    }
+}

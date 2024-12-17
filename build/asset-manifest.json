@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/static/css/main.15816827.css",
+    "main.js": "/static/js/main.1b913ca2.js",
+    "static/js/453.d7f4000e.chunk.js": "/static/js/453.d7f4000e.chunk.js",
+    "static/media/course.png": "/static/media/course.3d78d4c993be92fc7422.png",
+    "static/media/corsee.webp": "/static/media/corsee.4f9b650451891382b215.webp",
+    "static/media/logo.png": "/static/media/logo.a86b78f36ae3612384e5.png",
+    "static/media/ba9ma.png": "/static/media/ba9ma.15e611fa7ec219271fe1.png",
+    "static/media/acc_icon.png": "/static/media/acc_icon.c6814f0be1b4382a20e4.png",
+    "static/media/slick.svg": "/static/media/slick.2630a3e3eab21c607e21.svg",
+    "static/media/slick.eot": "/static/media/slick.a4e97f5a2a64f0ab1323.eot",
+    "static/media/slick.ttf": "/static/media/slick.c94f7671dcc99dce43e2.ttf",
+    "index.html": "/index.html",
+    "static/media/slick.woff": "/static/media/slick.295183786cd8a1389865.woff",
+    "main.15816827.css.map": "/static/css/main.15816827.css.map",
+    "main.1b913ca2.js.map": "/static/js/main.1b913ca2.js.map",
+    "453.d7f4000e.chunk.js.map": "/static/js/453.d7f4000e.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.15816827.css",
+    "static/js/main.1b913ca2.js"
+  ]
+}
