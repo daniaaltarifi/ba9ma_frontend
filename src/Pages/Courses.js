@@ -12,6 +12,7 @@ import MiniPopUpConfirm from "../components/MiniPopUpConfirm.js";
 import { UserContext } from "../UserContext.js";
 
 import axios from "axios";
+import { API_URL } from "../App.js";
 function Courses() {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -24,7 +25,7 @@ function Courses() {
   const [teacherData, setTeacherData] = useState([]);
 
   const [allCourses, setAllCourses] = useState([]);
- 
+
   const { user, logout } = useContext(UserContext);
   const { isLoggedIn, userName, userId, img } = user;
 
@@ -45,7 +46,7 @@ function Courses() {
   const [ShowPopupConf, setShowPopupConf] = useState(false);
   const [smShow, setSmShow] = useState(false);
   const [selectedTeacherEmail, setSelectedTeacherEmail] = useState("");
-  const [noCoursesMessage, setNoCoursesMessage] = useState('');
+  const [noCoursesMessage, setNoCoursesMessage] = useState("");
 
   const title_popup = "تسجيل الدخول";
   const description_popup = "لشراء قسم يجب تسجيل الدخول";
@@ -83,61 +84,64 @@ function Courses() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-  
+
     // Error collection
     const errors = {};
     if (!studentName) errors.studentName = "اسم الطالب مطلوب";
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.email = "البريد الإلكتروني غير صحيح";
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
+      errors.email = "البريد الإلكتروني غير صحيح";
     if (!address) errors.address = "مكان السكن مطلوب";
     if (!phone || !/^\d+$/.test(phone)) errors.phone = "رقم الهاتف غير صحيح";
     if (!selectedDepartment) errors.department = "يرجى اختيار القسم";
-  
+
     // Update error states
-    setStudentNameError(errors.studentName || '');
-    setEmailError(errors.email || '');
-    setAddressError(errors.address || '');
-    setPhoneError(errors.phone || '');
-    setDepartmentError(errors.department || '');
-    setCouponError(errors.couponCode || '');
-  
+    setStudentNameError(errors.studentName || "");
+    setEmailError(errors.email || "");
+    setAddressError(errors.address || "");
+    setPhoneError(errors.phone || "");
+    setDepartmentError(errors.department || "");
+    setCouponError(errors.couponCode || "");
+
     if (Object.keys(errors).length > 0) return; // Stop if errors exist
-  
+
     // Validate coupon code and department ID
     try {
-      const couponResponse = await axios.get(`http://localhost:8080/coupon/coupons/${coupon_code}`);
+      const couponResponse = await axios.get(
+        `${API_URL}/Coupons/getCouponByCode/${coupon_code}`
+      );
       const couponData = couponResponse.data;
-       
 
-
-        // Check if department ID from coupon matches selected department
-    if (couponData.department_id !== parseInt(selectedDepartment, 10)) {
-      setCouponError("الكوبون لا ينطبق على هذا القسم");
-      return;
-    }
+      // Check if department ID from coupon matches selected department
+      if (couponData.department_id !== parseInt(selectedDepartment, 10)) {
+        setCouponError("الكوبون لا ينطبق على هذا القسم");
+        return;
+      }
       // Proceed with submission
-      const userId = localStorage.getItem('id');
+      const userId = localStorage.getItem("id");
       if (!userId) {
         setMessage("User ID not found. Please log in.");
         return;
       }
-  
+
       try {
-        const response = await axios.post('http://localhost:8080/api/buy', {
-          student_name: studentName,
-          email,
-          address,
-          phone,
-          coupon_code: coupon_code,
-          department_id: selectedDepartment,
-          user_id: userId
-        });
-  
+        const response = await axios.post(
+          `${API_URL}/PaymentsDepartments/buy`,
+          {
+            student_name: studentName,
+            email,
+            address,
+            phone,
+            coupon_code: coupon_code,
+            department_id: selectedDepartment,
+            user_id: userId,
+          }
+        );
+
         setMessage("Request was successful!");
         handleClose();
         setSmShow(true);
         setShowPopupConf(true);
-       
-  
+
         // Clear form fields
         setStudentName("");
         setEmail("");
@@ -145,7 +149,10 @@ function Courses() {
         setPhone("");
         setCouponCode("");
       } catch (error) {
-        console.error("Error submitting form:", error.response?.data || error.message);
+        console.error(
+          "Error submitting form:",
+          error.response?.data || error.message
+        );
         if (error.response?.data.error === "Invalid coupon code") {
           setCouponError("رقم الكوبون غير صالح");
         } else {
@@ -153,7 +160,10 @@ function Courses() {
         }
       }
     } catch (error) {
-      console.error("Error fetching coupon data:", error.response?.data || error.message);
+      console.error(
+        "Error fetching coupon data:",
+        error.response?.data || error.message
+      );
       setCouponError("حدث خطأ في التحقق من رقم الكوبون");
     }
   };
@@ -164,35 +174,33 @@ function Courses() {
     const departmentId =
       selectedDepartment ||
       new URLSearchParams(location.search).get("department");
-    const teacherEmail = selectedTeacherEmail;  
-  
-  
-    let url = 'http://localhost:8080/courses';
+    const teacherEmail = selectedTeacherEmail;
 
+    let url = `${API_URL}/Courses`;
 
     if (departmentId && teacherEmail) {
       // Both department and teacher filters are selected
-      url = `http://localhost:8080/courses/filter/${departmentId}/${teacherEmail}`;
-  } else if (departmentId) {
+      url = `${API_URL}/Courses/filter/${departmentId}/${teacherEmail}`;
+    } else if (departmentId) {
       // Only department filter is selected
-      url = `http://localhost:8080/courses/getbydep/${departmentId}`;
-  } else if (teacherEmail) {
+      url = `${API_URL}/Courses/getbydep/${departmentId}`;
+    } else if (teacherEmail) {
       // Only teacher filter is selected
       url = `http://localhost:8080/teacher/teachercourse/${teacherEmail}`;
-  }
+    }
     try {
       const response = await axios.get(url);
       const fetchedCourses = response.data;
-  
+
       if (fetchedCourses.length === 0) {
-        setNoCoursesMessage('لا يوجد مواد متاحة ');
+        setNoCoursesMessage("لا يوجد مواد متاحة ");
         setAllCourses([]);
         setCourses([]);
         setTotalSlides(0);
         return;
       } else {
-        setNoCoursesMessage(''); // Clear message if there are courses
-  
+        setNoCoursesMessage(""); // Clear message if there are courses
+
         // Fetch additional data (student count and lesson count) for each course
         const coursesWithDetails = await Promise.all(
           fetchedCourses.map(async (course) => {
@@ -200,26 +208,29 @@ function Courses() {
               const [studentCountResponse, lessonCountResponse] =
                 await Promise.all([
                   axios.get(
-                    `http://localhost:8080/courses/users-counts/${course.id}`
+                    `${API_URL}/Courses/users-counts/${course.id}`
                   ),
                   axios.get(
-                    `http://localhost:8080/courses/lesson-counts/${course.id}`
+                    `${API_URL}/Courses/lesson-counts/${course.id}`
                   ),
                 ]);
-  
+
               const lessonCountData = lessonCountResponse.data;
               const lessonCount =
                 Array.isArray(lessonCountData) && lessonCountData.length > 0
                   ? lessonCountData[0].lesson_count
                   : 0;
-  
+
               return {
                 ...course,
                 student_count: studentCountResponse.data?.student_count || 0,
                 lesson_count: lessonCount || 0,
               };
             } catch (error) {
-              console.error(`Error fetching data for course ${course.id}:`, error);
+              console.error(
+                `Error fetching data for course ${course.id}:`,
+                error
+              );
               return {
                 ...course,
                 student_count: 0,
@@ -228,7 +239,7 @@ function Courses() {
             }
           })
         );
-  
+
         setAllCourses(coursesWithDetails);
         setCourses(
           coursesWithDetails.slice(
@@ -242,7 +253,6 @@ function Courses() {
       console.error("Error fetching courses:", error);
     }
   };
-  
 
   useEffect(() => {
     const query = new URLSearchParams(location.search);
@@ -257,34 +267,38 @@ function Courses() {
   // Fetch courses whenever selected department or currentSlide changes
   useEffect(() => {
     fetchCourses();
-  }, [selectedDepartment, currentSlide,selectedTeacherEmail]);
+  }, [selectedDepartment, currentSlide, selectedTeacherEmail]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
     const fetchDepartments = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8080/department"
+          `${API_URL}/departments/getDepartments`
         );
         setDepartment(response.data);
       } catch (error) {
         console.error("Error fetching departments:", error);
       }
     };
-    
+
     fetchDepartments();
   }, []);
   useEffect(() => {
     const fetchTeacherData = async () => {
       if (!selectedDepartment) return; // Do nothing if no department is selected
-      
+
       try {
-        const response = await axios.get(`http://localhost:8080/courses/getbydep/${selectedDepartment}`);
+        const response = await axios.get(
+          `${API_URL}/Courses/getbydep/${selectedDepartment}`
+        );
         const rawData = response.data;
 
         // Remove duplicates
         const uniqueTeachers = rawData.reduce((unique, teacher) => {
-          const isDuplicate = unique.some(item => item.teacher_name === teacher.teacher_name);
+          const isDuplicate = unique.some(
+            (item) => item.teacher_name === teacher.teacher_name
+          );
           if (!isDuplicate) unique.push(teacher);
           return unique;
         }, []);
@@ -303,7 +317,6 @@ function Courses() {
 
     setCurrentSlide(0); // Reset to the first slide when department changes
   };
-
 
   const handleTeacher = (e) => {
     const selectedTeacherId = e.target.value;
@@ -337,9 +350,7 @@ function Courses() {
   };
 
   const dataToDisplay = searchQuery ? searchResults : courses;
-  useEffect(() => {
-   
-  }, [courses, searchResults, dataToDisplay]);
+  useEffect(() => {}, [courses, searchResults, dataToDisplay]);
 
   const [slider, setSlider] = useState([]);
   const page = location.pathname;
@@ -349,18 +360,16 @@ function Courses() {
     if (hash) {
       const element = document.querySelector(hash);
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+        element.scrollIntoView({ behavior: "smooth" });
       }
     }
   }, [hash]);
 
-
   return (
     <>
-     
       <SliderComp slider={slider} />
-  
-      <div className="container courses_margin"id="order-section">
+
+      <div className="container courses_margin" id="order-section">
         <div className="row ">
           <div className="col-lg-4 col-md-4 col-sm-12">
             <div className="navbar__search">
@@ -422,11 +431,12 @@ function Courses() {
         </div>
       </div>
       <div className="container text-center purchaseDepartment_box">
-        <h2 className="h_home_box">       اغتنم الفرصة الآن في  قسمنا الرقمي المتقدم! 
+        <h2 className="h_home_box">
+          {" "}
+          اغتنم الفرصة الآن في قسمنا الرقمي المتقدم!
         </h2>
         <p className="p_home_box">
-        اشتري الان  لتأمين مكانك في القسم الذي سيغير مستقبلك! 
-
+          اشتري الان لتأمين مكانك في القسم الذي سيغير مستقبلك!
         </p>
         <button
           type="button"
@@ -568,117 +578,127 @@ function Courses() {
       </div>
       <div className="slick-wrapper">
         <div className="container ">
-        {noCoursesMessage ? (
-      <div className="no-courses-message d-flex justify-content-center "style={{color:"#833988"}}>
-        <p>{noCoursesMessage}</p>
-      </div>
-    ) : (
-          dataToDisplay.length > 0 && (
-            <div className="row justify-content-center align-items-center">
-              {dataToDisplay.map((card, index) => (
-                <div className="col-lg-4 col-md-6 col-sm-12">
-                  <div
-                    key={index}
-                    className={`slide ${
-                      index === currentSlide ? "active" : ""
-                    }`}
-                  >
-                    <Link
-                      to={`/coursedetails/${card.id}`}
-                      className="link_card"
+          {noCoursesMessage ? (
+            <div
+              className="no-courses-message d-flex justify-content-center "
+              style={{ color: "#833988" }}
+            >
+              <p>{noCoursesMessage}</p>
+            </div>
+          ) : (
+            dataToDisplay.length > 0 && (
+              <div className="row justify-content-center align-items-center">
+                {dataToDisplay.map((card, index) => (
+                  <div className="col-lg-4 col-md-6 col-sm-12">
+                    <div
+                      key={index}
+                      className={`slide ${
+                        index === currentSlide ? "active" : ""
+                      }`}
                     >
-                      <div className="card card_cont">
-                        <img
-                          src={`http://localhost:8080/${card.img}`}
-                          className="card-img-top img-fluid card_img"
-                          alt="course"
-                          loading="lazy"
-                        />
-                        <div className="card-body">
-                          <div>
-                            {/* rating here */}
-                            <p className="card-text card_dep">
-                              {" "}
-                              {card.department_name}{" "}
-                            </p>
-                          </div>
-                          <div className="d-flex justify-content-between">
-                            <p className="course_title_card">
-                              {card.subject_name}
-                            </p>{" "}
-                            <p className=" teacher_name_card">
-                              {card.teacher_name}
-                            </p>
-                          </div>
-                          <hr style={{ marginTop: "1px" }} />
-                          <div className="d-flex justify-content-between">
-                            <i
-                              className="fa-solid fa-file card_icon"
-                              style={{ color: "#F57D20" }}
-                            ></i>
-                            <p className="details_courses_card">
-                              {card.student_count} طالب
-                            </p>
-                            <i
-                              className="fa-solid fa-graduation-cap card_icon"
-                              style={{ color: "#F57D20" }}
-                            ></i>
-                            <p className="details_courses_card">
-                              {card.lesson_count} درس
-                            </p>
-                            <i
-                              className="fa-solid fa-clock card_icon"
-                              style={{ color: "#F57D20" }}
-                            ></i>{" "}
-                            <p className="details_courses_card">
-                              {card.created_date}
-                            </p>
+                      <Link
+                        to={`/coursedetails/${card.id}`}
+                        className="link_card"
+                      >
+                        <div className="card card_cont">
+                          <img
+                            src={`https://res.cloudinary.com/durjqlivi/${card.img}`}
+                            className="card-img-top img-fluid card_img"
+                            alt="course"
+                            loading="lazy"
+                          />
+                          <div className="card-body">
+                            <div>
+                              {/* rating here */}
+                              <p className="card-text card_dep">
+                                {" "}
+                                {card.Department.title}
+                              </p>
+                            </div>
+                            <div className="d-flex justify-content-between">
+                              <p className="course_title_card">
+                                {card.subject_name}
+                              </p>{" "}
+                              <p className=" teacher_name_card">
+                                {card.teacher_name}
+                              </p>
+                            </div>
+                            <hr style={{ marginTop: "1px" }} />
+                            <div className="d-flex justify-content-between">
+                              <i
+                                className="fa-solid fa-file card_icon"
+                                style={{ color: "#F57D20" }}
+                              ></i>
+                              <p className="details_courses_card">
+                                {card.student_count} طالب
+                              </p>
+                              <i
+                                className="fa-solid fa-graduation-cap card_icon"
+                                style={{ color: "#F57D20" }}
+                              ></i>
+                              <p className="details_courses_card">
+                                {card.lesson_count} درس
+                              </p>
+                              <i
+                                className="fa-solid fa-clock card_icon"
+                                style={{ color: "#F57D20" }}
+                              ></i>{" "}
+                              <p className="details_courses_card">
+                                {new Date(card.created_at).toLocaleDateString(
+                                  "en-GB",
+                                  {
+                                    year: "numeric",
+                                    month: "numeric",
+                                    day: "numeric",
+                                  }
+                                )}
+                              </p>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </Link>
-                  </div>{" "}
-                </div>
-              ))}
-              <div
-                className="col-md-12 col-sm-12 col_btn_prevNext"
-                style={{ marginTop: "10px" }}
-              >
-                <button
-                  onClick={nextSlide}
-                  className="btn mb-3  "
-                  disabled={currentSlide === totalSlides - 1}
-                >
-                  {" "}
-                  <i className="fa fa-arrow-right"></i>
-                </button>
+                      </Link>
+                    </div>{" "}
+                  </div>
+                ))}
                 <div
-                  style={{
-                    textAlign: "center",
-                    marginTop: "5px",
-                    fontSize: "18px",
-                  }}
+                  className="col-md-12 col-sm-12 col_btn_prevNext"
+                  style={{ marginTop: "10px" }}
                 >
-                  {" "}
-                  {/* <p>  {totalSlides} {currentSlide + 1}  </p> */}
-                  {/* Current Slide Number */}
-                  <span
+                  <button
+                    onClick={nextSlide}
+                    className="btn mb-3  "
+                    disabled={currentSlide === totalSlides - 1}
+                  >
+                    {" "}
+                    <i className="fa fa-arrow-right"></i>
+                  </button>
+                  <div
                     style={{
-                      fontWeight: "bold",
-                      paddingRight: "15px",
-                      paddingLeft: "15px",
+                      textAlign: "center",
+                      marginTop: "5px",
+                      fontSize: "18px",
                     }}
                   >
-                    {currentSlide + 1}
-                  </span>
-                  {/* Next Slide Number */}
-                  {hasNextSlide() && (
-                    <span style={{ cursor: "pointer" }} onClick={nextSlide}>
-                      {currentSlide + 2}
+                    {" "}
+                    {/* <p>  {totalSlides} {currentSlide + 1}  </p> */}
+                    {/* Current Slide Number */}
+                    <span
+                      style={{
+                        fontWeight: "bold",
+                        paddingRight: "15px",
+                        paddingLeft: "15px",
+                      }}
+                    >
+                      {currentSlide + 1}
                     </span>
-                  )}
-                  {/* Previous Slide Number */}
-                  {/* {currentSlide > 0 && (
+                    {/* Next Slide Number */}
+                    {hasNextSlide() && (
+                      <span style={{ cursor: "pointer" }} onClick={nextSlide}>
+                        {currentSlide + 2}
+                      </span>
+                    )}
+                    {/* Previous Slide Number */}
+                    {/* {currentSlide > 0 && (
                     <span
                       style={{ cursor: "pointer" }}
                       // onClick={() => goToSlide(currentSlide - 1)}
@@ -686,13 +706,14 @@ function Courses() {
                       {currentSlide}
                     </span>
                   )} */}
+                  </div>
+                  <button onClick={prevSlide} className="btn  mb-3  ">
+                    <i className="fa fa-arrow-left"></i>
+                  </button>
                 </div>
-                <button onClick={prevSlide} className="btn  mb-3  ">
-                  <i className="fa fa-arrow-left"></i>
-                </button>
               </div>
-            </div>
-          ))}
+            )
+          )}
         </div>
         {/* MiniPopUpLogin */}
         {showLoginPopup && (
@@ -704,7 +725,7 @@ function Courses() {
           />
         )}
       </div>
-     
+
       {ShowPopupConf && (
         <MiniPopUpConfirm
           title_popup_confirm={title_popup_confirm}

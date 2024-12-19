@@ -8,6 +8,7 @@ import Toastify from "toastify-js";
 import "toastify-js/src/toastify.css"; 
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import { API_URL } from "../App";
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -15,6 +16,21 @@ function Login() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  // const getDeviceInfo = () => {
+  //   const deviceDetector = new DeviceDetector();
+  //   const userAgent = navigator.userAgent;
+  //   const device = deviceDetector.parse(userAgent);
+  
+  //   return {
+  //     deviceType: device.device.type || 'unknown',
+  //     os: device.os.name || 'unknown',
+  //     osVersion: device.os.version || 'unknown',
+  //     browser: device.client.name || 'unknown',
+  //     browserVersion: device.client.version || 'unknown',
+  //   };
+  // };
+  
+  const [modalMessage, setModalMessage] = useState('');
   const getDeviceInfo = () => {
     const deviceDetector = new DeviceDetector();
     const userAgent = navigator.userAgent;
@@ -29,75 +45,132 @@ function Login() {
     };
   };
   
-  const [modalMessage, setModalMessage] = useState('');
-  
   const handleAccept = async () => {
     try {
-      // Perform the login process again since the user has accepted the modal
       const deviceInfo = getDeviceInfo();
-      const res = await axios.post('http://localhost:8080/api/login', {
+
+      const res = await axios.post(`${API_URL}/users/login`, {
         email,
         password,
-        deviceInfo
+        deviceInfo,
       });
-
+  
       if (res.data.token) {
         localStorage.setItem('auth', res.data.token);
         localStorage.setItem('name', res.data.name);
         localStorage.setItem('id', res.data.id);
         localStorage.setItem('img', res.data.img);
-
-        // Redirect to home page
+  
         window.location.href = '/';
       }
     } catch (err) {
       if (err.response && err.response.status === 403) {
-        setError('تسجيل الدخول غير متاح على هذا الجهاز');
+        setError('Login not allowed from this device');
       } else {
-        setError("البريد الالكتروني أو كلمة المرور غير صحيحة");
+        setError("Invalid email or password");
       }
       console.error('Login error:', err);
     }
-    
     handleClose();
   };
-
+  
   const handleLogin = async (e) => {
     e.preventDefault();
-    const deviceInfo = getDeviceInfo();
-
-    // Capture device information
+  
+    const deviceInfo = getDeviceInfo(); // Generate device info  
     try {
-
-      const res = await axios.post('http://localhost:8080/api/login', {
+      const res = await axios.post(`${API_URL}/users/login`, {
         email,
         password,
-        deviceInfo  // Include the device information in the request
+        deviceInfo, // Send device info in the request
       });
-     
-      if (res.data.message) {
-        setModalMessage(res.data.message);
-        handleShow();
-      } else if (res.data.token) {
+  
+      if (res.data.token) {
         localStorage.setItem('auth', res.data.token);
         localStorage.setItem('name', res.data.name);
         localStorage.setItem('id', res.data.id);
         localStorage.setItem('img', res.data.img);
-
+  
         window.location.href = '/';
       }
-  
     } catch (err) {
+      console.error("Login error:", err);
       if (err.response && err.response.status === 403) {
-        setError('تسجيل الدخول غير متاح على هذا الجهاز');
-      } 
-    
-      else {
-        setError("البريد الالكتروني أو كلمة المرور غير صحيحة");
+        setError('Login not allowed from this device');
+      } else {
+        setError("Invalid email or password");
       }
-      console.error('Login error:', err);
     }
   };
+  
+  
+  // const handleAccept = async () => {
+  //   try {
+  //     // Perform the login process again since the user has accepted the modal
+  //     const deviceInfo = getDeviceInfo();
+  //     const res = await axios.post(`${API_URL}/users/login`, {
+  //       email,
+  //       password,
+  //       deviceInfo
+  //     });
+
+  //     if (res.data.token) {
+  //       localStorage.setItem('auth', res.data.token);
+  //       localStorage.setItem('name', res.data.name);
+  //       localStorage.setItem('id', res.data.id);
+  //       localStorage.setItem('img', res.data.img);
+
+  //       // Redirect to home page
+  //       window.location.href = '/';
+  //     }
+  //   } catch (err) {
+  //     if (err.response && err.response.status === 403) {
+  //       setError('تسجيل الدخول غير متاح على هذا الجهاز');
+  //     } else {
+  //       setError("البريد الالكتروني أو كلمة المرور غير صحيحة");
+  //     }
+  //     console.error('Login error:', err);
+  //   }
+    
+  //   handleClose();
+  // };
+
+  // const handleLogin = async (e) => {
+  //   e.preventDefault();
+  //   const deviceInfo = getDeviceInfo();
+
+  //   // Capture device information
+  //   try {
+
+  //     const res = await axios.post(`${API_URL}/users/login`, {
+  //       email,
+  //       password,
+  //       deviceInfo  // Include the device information in the request
+  //     });
+     
+  //     if (res.data.message) {
+  //       setModalMessage(res.data.message);
+  //       handleShow();
+  //     } else if (res.data.token) {
+  //       localStorage.setItem('auth', res.data.token);
+  //       localStorage.setItem('name', res.data.name);
+  //       localStorage.setItem('id', res.data.id);
+  //       localStorage.setItem('img', res.data.img);
+
+  //       window.location.href = '/';
+  //     }
+  
+  //   } catch (err) {
+  //     if (err.response && err.response.status === 403) {
+  //       setError('تسجيل الدخول غير متاح على هذا الجهاز');
+  //     } 
+    
+  //     else {
+  //       setError("البريد الالكتروني أو كلمة المرور غير صحيحة");
+  //     }
+  //     console.error('Login error:', err);
+  //   }
+  // };
   
   return (
     <>

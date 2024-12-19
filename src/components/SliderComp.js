@@ -28,63 +28,32 @@ const CACHE_EXPIRY_TIME =60000; // Cache expiry time in milliseconds (e.g., 5 mi
   };
  
   
-  // const fetchSlider = async () => {
-  //   try {
-  //     const response = await axios.get(`http://localhost:8080/sliders${page}`);
-  //     const data=response.data;
-  //     setSlider(data);  // Assuming setTags is a function to update your state
-  //     console.log("firstSlider", data);
-  //   } catch (error) {
-  //     console.error("Failed to fetch slider:", error);
-  //   }
-  // };
   const [loading, setLoading] = useState(true);
 
-  // const fetchSlider = async () => {
-  //   setLoading(true);
-  //   try {
-  //     // Construct unique key for local storage based on page
-  //     const storageKey = `sliderData_${page}`;
-  //     const storedData = localStorage.getItem(storageKey);
-      
-  //     if (storedData) {
-  //       setSlider(JSON.parse(storedData)); // Use data from local storage
-  //     } else {
-  //       // Fetch data from API if not in local storage
-  //       const response = await axios.get(`http://localhost:8080/sliders${page}`);
-  //       const data = response.data;
-  //       setSlider(data);
-  //       localStorage.setItem(storageKey, JSON.stringify(data)); // Store data in local storage
-  //     }
-  //   } catch (error) {
-  //     console.error("Failed to fetch slider:", error);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
+  
   const fetchSlider = async () => {
     setLoading(true);
     try {
       // Construct unique key for local storage based on page
-      const storageKey = `sliderData_${page}`;
-      const timestampKey = `${storageKey}_timestamp`;
+      // const storageKey = `sliderData_${page}`;
+      // const timestampKey = `${storageKey}_timestamp`;
 
-      const storedData = localStorage.getItem(storageKey);
-      const storedTimestamp = localStorage.getItem(timestampKey);
+      // const storedData = localStorage.getItem(storageKey);
+      // const storedTimestamp = localStorage.getItem(timestampKey);
 
-      const currentTime = new Date().getTime();
+      // const currentTime = new Date().getTime();
 
-      if (storedData && storedTimestamp && (currentTime - parseInt(storedTimestamp, 10)) < CACHE_EXPIRY_TIME) {
-        // Use cached data if not expired
-        setSlider(JSON.parse(storedData));
-      } else {
+      // if (storedData && storedTimestamp && (currentTime - parseInt(storedTimestamp, 10)) < CACHE_EXPIRY_TIME) {
+      //   // Use cached data if not expired
+      //   setSlider(JSON.parse(storedData));
+      // } else {
         // Fetch data from API if not cached or cache expired
         const response = await axios.get(`${API_URL}/sliders/getSliderByPage${page}`);
         const data = response.data;
         setSlider(data);
-        localStorage.setItem(storageKey, JSON.stringify(data)); // Store data in local storage
-        localStorage.setItem(timestampKey, currentTime.toString()); // Update timestamp
-      }
+      //   localStorage.setItem(storageKey, JSON.stringify(data)); // Store data in local storage
+      //   localStorage.setItem(timestampKey, currentTime.toString()); // Update timestamp
+      // }
     } catch (error) {
       console.error("Failed to fetch slider:", error);
     } finally {
@@ -103,7 +72,7 @@ const CACHE_EXPIRY_TIME =60000; // Cache expiry time in milliseconds (e.g., 5 mi
       {/* slider section */}
 
       <Slider {...settings} style={{ overflow: "hidden" }}>
-      <div className="fixed_image_slider">
+      {/* <div className="fixed_image_slider"> */}
         {slider.map((slide) => (
           <div className={`slide-item `}>
             <img
@@ -143,7 +112,7 @@ const CACHE_EXPIRY_TIME =60000; // Cache expiry time in milliseconds (e.g., 5 mi
           </div>
         ))}
     
-      </div>
+      {/* </div> */}
       </Slider>
 
        {/* <Slider {...settings} style={{ overflow: "hidden" }}>

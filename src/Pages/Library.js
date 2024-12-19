@@ -8,6 +8,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import axios from "axios";
+import { API_URL } from "../App";
 function Library() {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -17,7 +18,7 @@ function Library() {
   const [selectedDepartment, setSelectedDepartment] = useState("");
   const fetchLibrary = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/library");
+      const response = await axios.get(`${API_URL}/Libraries/getLibraries`);
       setLibrary(response.data);
     } catch (error) {
       console.error("Error fetching library:", error);
@@ -27,7 +28,7 @@ function Library() {
     window.scrollTo(0, 0);
     const fetchDepartments = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/department");
+        const response = await axios.get(`${API_URL}/departments/getDepartments`);
         setDepartment(response.data);
       } catch (error) {
         console.error("Error fetching departments:", error);
@@ -82,7 +83,7 @@ function Library() {
   const fetchLibraryBasedDepartment = async (selectedDepartmentId) => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/library/getbydep/${selectedDepartmentId}`
+        `${API_URL}/Libraries/getbydep/${selectedDepartmentId}`
       ); 
       setLibrary(response.data);
     } catch (error) {
@@ -215,8 +216,13 @@ useEffect(() => {
                           style={{ color: "#F57D20" }}
                         ></i>{" "}
                         <p className="details_courses_card">
-                          {" "}
-                          {data.created_date}
+                                  {new Date(
+                                      data.createdAt
+                                    ).toLocaleDateString("en-GB", {
+                                      year: "numeric",
+                                      month: "numeric",
+                                      day: "numeric",
+                                    })}
                         </p>
                         <button
                           onClick={() => handleDownload(data.file_book)}

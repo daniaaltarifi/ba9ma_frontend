@@ -1,5 +1,6 @@
 // UserContext.js
 import React, { createContext, useState, useEffect } from 'react';
+import { API_URL } from './App';
 
 const UserContext = createContext();
 
@@ -44,7 +45,7 @@ const [blobImg,setBlobImg]=useState("")
       return;
     }
     try {
-      const response = await fetch('http://localhost:8080/api/logout', {
+      const response = await fetch(`${API_URL}/users/logout`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

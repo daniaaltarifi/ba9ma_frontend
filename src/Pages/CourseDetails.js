@@ -18,6 +18,7 @@ import "../Css/courses.css";
 import MiniPopUpLogin from "../components/MiniPopUpLogin.js";
 import MiniPopUpConfirm from "../components/MiniPopUpConfirm.js";
 import ReadMoreReact from 'read-more-react';
+import { API_URL } from "../App.js";
 
 function CourseDetails() {
   const { id } = useParams();
@@ -100,13 +101,14 @@ function CourseDetails() {
     const fetchVideosData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8080/courses/getbyvideo/${id}`
+          `${API_URL}/Courses/videos/${id}`
         );
         if (!response.ok) {
           throw new Error("Failed to fetch video details");
         }
         const data = await response.json();
         setVideosData(data);
+        console.log("first video", data);
         const initialChecked = {};
         data.forEach((item) => {
           const storedState = localStorage.getItem(`checkbox-${item.id}`);
@@ -290,7 +292,7 @@ function CourseDetails() {
     const fetchStudentCount = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/courses/users-counts/${courseId}`
+          `${API_URL}/Courses/users-counts/${courseId}`
         );
         const data = response.data;
         if (data && data.student_count !== undefined) {
@@ -310,7 +312,7 @@ function CourseDetails() {
   const fetchCourseDetails = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8080/courses/${id}`
+        `${API_URL}/Courses/${id}`
       );
       if (!response.ok) {
         throw new Error("Failed to fetch blog details");
@@ -329,7 +331,7 @@ function CourseDetails() {
     const fetchLessonCounts = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/courses/lesson-counts/${courseId}`
+          `${API_URL}/Courses/lesson-counts/${courseId}`
         );
         const data = response.data;
         if (data.length > 0) {
@@ -351,7 +353,7 @@ function CourseDetails() {
     if (teacherId) {
       try {
         const response = await axios.get(
-          `http://localhost:8080/teacher/student-counts/${teacherId}`
+          `http://localhost:8080/TeacherRoutes/student-counts/${teacherId}`
         );
         const data = response.data;
         if (data && data.student_count !== undefined) {
@@ -522,7 +524,7 @@ useEffect(() => {
   // Example API call to fetch course details
   const fetchCourseData = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/courses/${courseId}`);
+      const response = await axios.get(`${API_URL}/Courses/${courseId}`);
       setCourse(response.data);
     } catch (error) {
       console.error("Error fetching course data:", error);
@@ -578,7 +580,8 @@ useEffect(() => {
           <div className="row ">
             <div className="col-lg-6 col-md-6 col-sm-12 d-flex justify-content-center">
               <img
-                src={`http://localhost:8080/${course.img}`}
+              src={`https://res.cloudinary.com/durjqlivi/${course.img}`}
+                // src={`http://localhost:8080/${course.img}`}
                 alt="coursedetails"
                 className="img-fluid img_coursedetails"
                 loading="lazy"
@@ -655,7 +658,7 @@ useEffect(() => {
                           }
                         >
                           <source
-                            src={`http://localhost:8080/${videosData[0].defaultvideo}`} // Assuming first video is default
+                            src={`https://res.cloudinary.com/durjqlivi/video/upload/${videosData[0].defaultvideo}`} // Assuming first video is default
                             type="video/mp4"
                           />
                           Your browser does not support the video tag.
@@ -857,7 +860,7 @@ useEffect(() => {
                                   preload="metadata"
                                 >
                                   <source
-                                    src={`http://localhost:8080/${videosData[currentVideoIndex].url}`}
+                                    src={`https://res.cloudinary.com/durjqlivi/video/upload/${videosData[currentVideoIndex].url}`}
                                     type="video/mp4"
                                   />
                                   Your browser does not support the video tag.
@@ -1043,7 +1046,7 @@ useEffect(() => {
                       <div className="row">
                         <div className="col-lg-3 col-md-3 col-sm-12">
                           <img
-                            src={`http://localhost:8080/${course.img}`}
+                            src={`tps://res.cloudinary.com/durjqlivi/${course.img}`}
                             alt="teacher img"
                             height={"80vh"}
                             width={"80vh"}

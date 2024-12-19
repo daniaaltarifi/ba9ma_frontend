@@ -25,11 +25,21 @@ function Blogs() {
         (blog) => blog.action === "approved"
       );
       setBlogs(approvedBlogs);
+      if (approvedBlogs.createdAt) {
+        const formattedDate = new Date(
+          approvedBlogs.createdAt
+        ).toLocaleDateString("en-GB", {
+          year: "numeric",
+          month: "numeric",
+          day: "numeric",
+        });
+        approvedBlogs.createdAt = formattedDate; // Overwrite the createdAt field with formatted date
+      }
     } catch (error) {}
   };
   const fetchTags = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/tag/uniquetag");
+      const response = await axios.get(`${API_URL}/Tags/getUniqueTags`);
       const tags = response.data;
       setTags(tags); // Assuming setTags is a function to update your state
     } catch (error) {
@@ -38,7 +48,7 @@ function Blogs() {
   };
 
   const fetchLastThreeBlogs = async () => {
-    const response = await axios.get("http://localhost:8080/blog/lastthree");
+    const response = await axios.get(`${API_URL}/blog/lastthree`);
     const blogsData = response.data;
     const approvedBlogs = blogsData.filter(
       (blog) => blog.action === "approved"
@@ -48,7 +58,9 @@ function Blogs() {
   // design of blog that have purple background
   const fetchDynamicBlog = async () => {
     try {
-      const response = await axios.get(`${API_URL}/dynamicBlogs/getDynamicBlogs`);
+      const response = await axios.get(
+        `${API_URL}/dynamicBlogs/getDynamicBlogs`
+      );
       const data = response.data;
       setDynamicBlog(data);
     } catch (error) {
@@ -78,7 +90,7 @@ function Blogs() {
   const handleTagClick = async (tag_name) => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/tag/blogbytag/${tag_name}`
+        `${API_URL}/Tags/getBlogsByTag/${tag_name}`
       );
       const blogs = response.data;
       const mappedBlogs = blogs.map((tag) => ({
@@ -199,7 +211,6 @@ function Blogs() {
                             >
                               <img
                                 src={`https://res.cloudinary.com/durjqlivi/${blog.img}`}
-                                // src={`http://localhost:8080/` + blog.img}
                                 alt={blog.title}
                                 loading="lazy"
                               />
@@ -252,7 +263,13 @@ function Blogs() {
                                     style={{ color: "#F57D20" }}
                                   ></i>
                                   <p className="details_blogs_card ">
-                                    {blog.created_date}
+                                    {new Date(
+                                      blog.createdAt
+                                    ).toLocaleDateString("en-GB", {
+                                      year: "numeric",
+                                      month: "numeric",
+                                      day: "numeric",
+                                    })}{" "}
                                   </p>
                                 </div>
                               </div>
@@ -303,7 +320,6 @@ function Blogs() {
                   <div className="categ_lastblog_cont">
                     <img
                       src={`https://res.cloudinary.com/durjqlivi/${lastthreeblogs.img}`}
-                      // src={`http://localhost:8080/` + lastthreeblogs.img}
                       alt=""
                       className="img-fluid img_last_blog"
                       loading="lazy"

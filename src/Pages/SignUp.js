@@ -3,6 +3,7 @@ import "../Css/auth.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { API_URL } from "../App";
 
 function SignUp() {
   const [name, setName] = useState("");
@@ -68,7 +69,7 @@ function SignUp() {
     }
 
     try {
-      const res = await axios.post("http://localhost:8080/api/register", {
+      const res = await axios.post(`${API_URL}/users/register`, {
         name,
         email,
         password,

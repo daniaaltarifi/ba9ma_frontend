@@ -4,12 +4,13 @@ import "../Css/contactUs.css";
 import CommentForm from "../components/CommentForm";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
+import { API_URL } from "../App";
 function ContactUs() {
   const [contact,setContact]=useState([])
 
   const fetchContact= async () => {
     try {
-        const response = await axios.get(`http://localhost:8080/contactdynamic/`);
+        const response = await axios.get(`${API_URL}/contactdynamic/`);
         const data=response.data;
         setContact(data);  // Assuming setTags is a function to update your state
    
@@ -25,7 +26,7 @@ useEffect(()=>{
   const handleSubmit = async ( name, email,comment) => {
    
     try {
-      const response = await axios.post("http://localhost:8080/connects/comments", {
+      const response = await axios.post(`${API_URL}/Comments/addComment`, {
         name : name ,
          email: email,
          comment: comment

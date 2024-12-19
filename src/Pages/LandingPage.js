@@ -30,18 +30,17 @@ function LandingPage() {
   };
   const fetchSlider = async () => {
     try {
-      const storedData = localStorage.getItem("sliderData");
-      if (storedData) {
-        setSlider(JSON.parse(storedData)); // Use data from local storage
-      } else {
+      // const storedData = localStorage.getItem("sliderData");
+      // if (storedData) {
+      //   setSlider(JSON.parse(storedData)); // Use data from local storage
+      // } else {
         const response = await axios.get(
           `${API_URL}/sliders/getAllSliders`
         );
         const data = response.data;
         setSlider(data); // Assuming setTags is a function to update your state
-        console.log("slider", data);
-        localStorage.setItem("sliderData", JSON.stringify(data)); // Store data in local storage
-      }
+      //   localStorage.setItem("sliderData", JSON.stringify(data)); // Store data in local storage
+      // }
     } catch (error) {
       console.error("Failed to fetch slider:", error);
     }
@@ -66,7 +65,7 @@ function LandingPage() {
   return (
     <>
       <Slider {...settings} style={{ overflow: "hidden" }}>
-        <div className="fixed_image_slider"></div>
+        {/* <div className="fixed_image_slider"></div> */}
 
         {slider.map((slide) => (
           <div className="slide-item">

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useContext } from 'react';
 import axios from 'axios';
 import "../Css/auth.css";
 import { UserContext } from '../UserContext';
+import { API_URL } from '../App';
 
 function Profile() {
   const [successMessage, setSuccessMessage] = useState('');
@@ -14,41 +15,41 @@ function Profile() {
     password: '',
     confirmPassword: '',
   });
-useEffect(()=>{
-  const fetchData = async () => {
-    const token = localStorage.getItem('token');
+// useEffect(()=>{
+//   const fetchData = async () => {
+//     const token = localStorage.getItem('token');
   
-    if (!token) {
-      console.log('No token found');
-      return;
-    }
+//     if (!token) {
+//       console.log('No token found');
+//       return;
+//     }
   
-    try {
-      const response = await fetch('http://localhost:8080/api/protected', {
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
+//     try {
+//       const response = await fetch('http://localhost:8080/api/protected', {
+//         headers: { 'Authorization': `Bearer ${token}` }
+//       });
   
-      const data = await response.json();
-      if (response.ok) {
-        // Use the data
-      } else {
-        console.error(data.message);
-        // Handle errors or expired token
-        localStorage.removeItem('auth'); // Clear invalid token
-      }
-    } catch (error) {
-      console.error('An error occurred:', error);
-    }
-  };
-fetchData()  
-},[])
+//       const data = await response.json();
+//       if (response.ok) {
+//         // Use the data
+//       } else {
+//         console.error(data.message);
+//         // Handle errors or expired token
+//         localStorage.removeItem('auth'); // Clear invalid token
+//       }
+//     } catch (error) {
+//       console.error('An error occurred:', error);
+//     }
+//   };
+// fetchData()  
+// },[])
   const [imageUrl, setImageUrl] = useState(null); // Initialize with defaultImage
 
   const fileInputRef = useRef(null);
 
   useEffect(() => {
     if (user.userId) {
-      axios.get(`http://localhost:8080/api/profile/${user.userId}`)
+      axios.get(`${API_URL}/profile/getProfileUsers/${user.userId}`)
         .then(response => {
           setProfile({
             name: response.data.name,
@@ -58,7 +59,7 @@ fetchData()
             confirmPassword: ''
           });
           // Set the image URL from the profile data
-          setImageUrl(`http://localhost:8080/${response.data.img}`);
+          setImageUrl(`https://res.cloudinary.com/durjqlivi/${response.data.img}`);
         })
         .catch(error => {
           console.error('There was an error fetching the profile!', error);
@@ -88,13 +89,13 @@ const handleUpdate = async () => {
   }
 
   try {
-    const response = await axios.put(`http://localhost:8080/api/profile/${user.userId}`, formData, {
+    const response = await axios.put(`${API_URL}/profile/updateProfile/${user.userId}`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
     });
     // Update the image URL with the new image URL from the server
-      setImageUrl(`http://localhost:8080/${response.data.img}`);
+      setImageUrl(`https://res.cloudinary.com/durjqlivi/${response.data.img}`);
 setSuccessMessage('تم تعديل حسابك');
     updateUser(profile.name,userId,response.data.img)
 setProfile(prevState => ({

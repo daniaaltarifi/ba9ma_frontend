@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { UserContext } from "../UserContext";
+import { API_URL } from "../App";
 
 function MyCourses() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -46,11 +47,11 @@ function MyCourses() {
           fetchedCourses.map(async (course) => {
             try {
               const studentCountResponse = await axios.get(
-                `http://localhost:8080/courses/users-counts/${course.course_id}`
+                `${API_URL}/Courses/users-counts/${course.course_id}`
               );
   
               const lessonCountResponse = await axios.get(
-                `http://localhost:8080/courses/lesson-counts/${course.course_id}`
+                `${API_URL}/Courses/lesson-counts/${course.course_id}`
               );
   
 
@@ -91,7 +92,7 @@ function MyCourses() {
   useEffect(() => {
     const fetchDepartments = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/department");
+        const response = await axios.get(`${API_URL}/departments/getDepartments`);
         setDepartment(response.data);
       } catch (error) {
         console.error("Error fetching departments:", error);
@@ -206,7 +207,8 @@ function MyCourses() {
            >
              <div className="card card_cont">
                <img
-                 src={`http://localhost:8080/${course.img}`}
+                                           src={`https://res.cloudinary.com/durjqlivi/${course.img}`}
+
                  className="card-img-top img-fluid card_img"
                  alt={course.subject_name}
                  loading="lazy"

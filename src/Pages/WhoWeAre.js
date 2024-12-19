@@ -25,7 +25,7 @@ function WhoWeAre() {
   };
   const fetchWhoweare = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/whoweare");
+      const response = await axios.get(`${API_URL}/WhoWeAre/getWhoweares`);
       const data = response.data;
       setWhoweare(data);
     } catch (error) {

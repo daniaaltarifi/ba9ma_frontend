@@ -1,18 +1,18 @@
 .slide-item {
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: 80vh;
 }
-.fixed_image_slider {
-  position: relative; /* Ensure the overlay is positioned correctly */
-  background-image: url('../assets/course.png'); /* High-resolution image */
-  background-size: cover; /* Ensure the image covers the entire container */
-  background-position: center; /* Center the background image */
-  width: 100%; /* Full width */
-  height: 78vh; /* Full viewport height */
-    background-color: rgba(0, 0, 0, 0.1); /* Black color with 50% opacity */
-  background-blend-mode: overlay; /* Blend the color with the image */
-}
+/* .fixed_image_slider {
+  position: relative; 
+  background-image: url('../assets/course.png');
+  background-size: cover; 
+  background-position: center; 
+  width: 100%; 
+  height: 78vh; 
+    background-color: rgba(0, 0, 0, 0.1); 
+  background-blend-mode: overlay; 
+} */
 
 .img_home {
   width: 100%; /* Ensures the image width fills its container */

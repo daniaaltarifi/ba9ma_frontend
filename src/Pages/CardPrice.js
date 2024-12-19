@@ -4,6 +4,7 @@ import SliderComp from "../components/SliderComp.js";
 import "../Css/cardPrice.css";
 import Table from "react-bootstrap/Table";
 import { useNavigate, useLocation, Link } from "react-router-dom";
+import { API_URL } from "../App.js";
 function CardPrice() {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -18,7 +19,7 @@ function CardPrice() {
     const fetchGoverment = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8080/cards"
+          `${API_URL}/availablecards`
         );
         const gov = response.data;
         setGoverment(gov);
@@ -29,7 +30,7 @@ function CardPrice() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8080/department/"
+          `${API_URL}/departments/getDepartments`
         );
         const data = response.data;
         setDepartmentData(data);
@@ -40,7 +41,7 @@ function CardPrice() {
     const fetchPurchaseSteps = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8080/purchasesteps"
+          `${API_URL}/purchasesteps`
         );
         setPurchaseSteps(response.data);
       } catch (error) {
@@ -55,7 +56,7 @@ function CardPrice() {
   const fetchcards = async (id) => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/cards/${id}`
+        `${API_URL}/availablecards/available-cardsbygovermentId/${id}`
       );
       setSelectedGovernorate(response.data);
       setSelectedGovernorateId(id);
@@ -110,7 +111,7 @@ function CardPrice() {
               <div className="col-lg-3 col-md-6 col-sm-12 ">
                 <div className="box_purple__orderby_cardprice">
                   <img
-                    src={`http://localhost:8080/${step.img}`}
+                    src={`https://res.cloudinary.com/durjqlivi/${step.img}`}
                     alt="www icon"
                     className="img-fluid icon_orderby_cardprice"
                     loading="lazy"

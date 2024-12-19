@@ -26,13 +26,22 @@ function BlogDetails() {
         }
         const data = await response.json();
         setBlogDetails(data);
+        if (data.createdAt) {
+          const formattedDate = new Date(data.createdAt).toLocaleDateString("en-GB", {
+            year: "numeric",
+            month: "numeric",
+            day: "numeric",
+          });
+          data.createdAt = formattedDate; // Overwrite the createdAt field with formatted date
+        }
+        console.log("data: ", data);
       } catch (error) {
         console.error("Error fetching blog details:", error);
       }
     };
 
     const fetchLastThreeBlogs = async () => {
-      const response = await axios.get("http://localhost:8080/blog/lastthree");
+      const response = await axios.get(`${API_URL}/blog/lastthree`);
       const blogsData = response.data;
       const approvedBlogs = blogsData.filter(
         (blog) => blog.action === "approved"
@@ -41,7 +50,7 @@ function BlogDetails() {
     };
     const fetchTags = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/tag/uniquetag");
+        const response = await axios.get(`${API_URL}/Tags/getUniqueTags`);
         const tags = response.data;
         setTags(tags); // Assuming setTags is a function to update your state
       } catch (error) {
@@ -109,7 +118,7 @@ function BlogDetails() {
     return <p>Loading...</p>; // Or a loading spinner if you prefer
   }
   // Destructure properties from blogDetails safely
-  const { title, author, descr, img, created_date } = blogDetails;
+  const { title, author, descr, img, createdAt } = blogDetails;
 
   return (
     <>
@@ -134,7 +143,7 @@ function BlogDetails() {
                   className="fa-solid fa-clock card_icon "
                   style={{ color: "#F57D20" }}
                 ></i>
-                <p className="date_blogdetails"> {created_date}</p>
+                <p className="date_blogdetails"> {createdAt}</p>
               </div>
               <h1 className="title_coursedetails"> {title} </h1>
             </div>
@@ -183,7 +192,7 @@ function BlogDetails() {
                                     {comment.name}
                                   </p>
                                   <p className="comment_date_coursedetails">
-                                    {comment.created_date}
+                                    {comment.createdAt}
                                   </p>
                                 </div>
                                 <p className="desc_of_teacher_coursedetails">
@@ -239,7 +248,6 @@ function BlogDetails() {
                     <div className="categ_lastblog_cont">
                       <img
                         src={`https://res.cloudinary.com/durjqlivi/${lastthreeblogs.img}`}
-                        // src={`http://localhost:8080/` + lastthreeblogs.img}
                         alt=""
                         className="img-fluid img_last_blog"
                         loading="lazy"

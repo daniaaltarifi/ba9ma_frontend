@@ -1,6 +1,7 @@
 import "../Css/auth.css";
 import React, { useState } from 'react';
 import axios from 'axios';
+import { API_URL } from "../App";
 
 const ForgotPassword = () => {
   // State for managing email input, error messages, and success messages
@@ -11,7 +12,7 @@ const ForgotPassword = () => {
   const handleForgotPassword = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:8080/api/forgot-password', { email });
+      const res = await axios.post(`${API_URL}/users/forgot-password`, { email });
 
       // Check if the response indicates that the email does not exist
       if (res.data === 'The email does not exist. Please enter the correct email.') {
