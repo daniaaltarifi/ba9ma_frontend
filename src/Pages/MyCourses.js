@@ -19,7 +19,7 @@ function MyCourses() {
     const fetchCourses = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/api/getApprovedCoursesForUser/${userId}`
+          `${API_URL}/PaymentsCourse/getApprovedCoursesForUser/${userId}`
         );
         setCourses(response.data);
         setSearchResults(response.data);
@@ -38,7 +38,7 @@ function MyCourses() {
     const fetchCourses = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/api/getApprovedCoursesForUser/${userId}`
+          `${API_URL}/PaymentsCourse/getApprovedCoursesForUser/${userId}`
         );
         const fetchedCourses = response.data;
   

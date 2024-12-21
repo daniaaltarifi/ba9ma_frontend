@@ -181,12 +181,14 @@ function Courses() {
     if (departmentId && teacherEmail) {
       // Both department and teacher filters are selected
       url = `${API_URL}/Courses/filter/${departmentId}/${teacherEmail}`;
+      console.log("Filtering by Department and Teacher:", url);
+
     } else if (departmentId) {
       // Only department filter is selected
       url = `${API_URL}/Courses/getbydep/${departmentId}`;
     } else if (teacherEmail) {
       // Only teacher filter is selected
-      url = `http://localhost:8080/teacher/teachercourse/${teacherEmail}`;
+      url = `${API_URL}/TeacherRoutes/teachercourse/${teacherEmail}`;
     }
     try {
       const response = await axios.get(url);
@@ -284,33 +286,74 @@ function Courses() {
 
     fetchDepartments();
   }, []);
+  
   useEffect(() => {
     const fetchTeacherData = async () => {
       if (!selectedDepartment) return; // Do nothing if no department is selected
-
+  
       try {
         const response = await axios.get(
           `${API_URL}/Courses/getbydep/${selectedDepartment}`
         );
         const rawData = response.data;
-
-        // Remove duplicates
-        const uniqueTeachers = rawData.reduce((unique, teacher) => {
+  
+        // Remove duplicates and extract teacher names
+        const uniqueTeachers = rawData.reduce((unique, course) => {
+          const teacherName = course.teacher?.teacher_name;
+          const teacherId = course.teacher_id;
+          const teacherEmail = course.teacher?.email;
+        
           const isDuplicate = unique.some(
-            (item) => item.teacher_name === teacher.teacher_name
+            (item) => item.teacher_id === teacherId
           );
-          if (!isDuplicate) unique.push(teacher);
+        
+          if (teacherName && teacherId && teacherEmail && !isDuplicate) {
+            unique.push({
+              teacher_id: teacherId,
+              teacher_name: teacherName,
+              email: teacherEmail,
+            });
+          }
           return unique;
         }, []);
-
+        
+  
         setTeacherData(uniqueTeachers);
       } catch (error) {
         console.error("Error fetching teacher data:", error);
       }
     };
-
+  
     fetchTeacherData();
   }, [selectedDepartment]);
+  
+  // useEffect(() => {
+  //   const fetchTeacherData = async () => {
+  //     if (!selectedDepartment) return; // Do nothing if no department is selected
+
+  //     try {
+  //       const response = await axios.get(
+  //         `${API_URL}/Courses/getbydep/${selectedDepartment}`
+  //       );
+  //       const rawData = response.data;
+
+  //       // Remove duplicates
+  //       const uniqueTeachers = rawData.reduce((unique, teacher) => {
+  //         const isDuplicate = unique.some(
+  //           (item) => item.teacher.teacher_name === teacher.teacher_name
+  //         );
+  //         if (!isDuplicate) unique.push(teacher);
+  //         return unique;
+  //       }, []);
+
+  //       setTeacherData(uniqueTeachers);
+  //     } catch (error) {
+  //       console.error("Error fetching teacher data:", error);
+  //     }
+  //   };
+
+  //   fetchTeacherData();
+  // }, [selectedDepartment]);
   const handleDepartment = (e) => {
     const selectedDepartmentId = e.target.value;
     setSelectedDepartment(selectedDepartmentId);
@@ -321,10 +364,12 @@ function Courses() {
   const handleTeacher = (e) => {
     const selectedTeacherId = e.target.value;
     setSelectedTeacher(selectedTeacherId);
-
+console.log("first", selectedTeacherId)
+console.log("first", teacherData)
     const teacher = teacherData.find(
-      (tech) => tech.id.toString() === selectedTeacherId
+      (tech) => tech.teacher_id.toString() === selectedTeacherId
     );
+    console.log("teach",teacher)
     if (teacher) {
       setSelectedTeacherEmail(teacher.email);
     } else {
@@ -421,7 +466,7 @@ function Courses() {
             >
               <option value="">اختر استاذ</option>
               {teacherData.map((tech) => (
-                <option key={tech.id} value={tech.id}>
+                <option key={tech.id} value={tech.teacher_id}>
                   {tech.teacher_name}
                 </option>
               ))}
@@ -620,7 +665,7 @@ function Courses() {
                                 {card.subject_name}
                               </p>{" "}
                               <p className=" teacher_name_card">
-                                {card.teacher_name}
+                                {card.teacher.teacher_name}
                               </p>
                             </div>
                             <hr style={{ marginTop: "1px" }} />

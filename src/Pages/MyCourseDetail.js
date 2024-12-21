@@ -64,7 +64,7 @@ function MyCourseDetail() {
 
     const fetchCommentCourses = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/commentcourse`);
+        const response = await axios.get( `${API_URL}/commentCourse/getAllCommentCourses`);
         const comments = response.data;
         const approvedComments = comments.filter(
           (comment) => comment.action === "approved"
@@ -244,7 +244,7 @@ function MyCourseDetail() {
   const handleSubmit = async (name, email, comment, rating) => {
     try {
       const response = await axios.post(
-        "http://localhost:8080/commentcourse/add",
+        `${API_URL}/commentCourse/addCommentCourse`,
         {
           name: name,
           email: email,
@@ -266,7 +266,7 @@ function MyCourseDetail() {
     const fetchCourseCount = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/courses/course-counts/${teacherId}`
+          `${API_URL}/Courses/course-counts/${teacherId}`
         );
         // Assume response.data is an array with one object
         const data = response.data;
@@ -374,15 +374,18 @@ function MyCourseDetail() {
   };
 
   const validateCouponCode = async (code) => {
-    try {
-      const response = await fetch("http://localhost:8080/api/validate", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ coupon_code: couponCode, course_id: courseId }),
-      });
-
+   try {
+       const response = await fetch(
+         `${API_URL}/PaymentsCourse/validate`,
+         {
+           method: "POST",
+           headers: {
+             "Content-Type": "application/json",
+           },
+           body: JSON.stringify({ coupon_code: couponCode, course_id: courseId }),
+         }
+       );
+ 
       const data = await response.json();
 
       if (!response.ok) {
@@ -443,7 +446,7 @@ function MyCourseDetail() {
       return;
     }
     try {
-      const response = await axios.post("http://localhost:8080/api/courses", {
+      const response = await axios.post(`${API_URL}/PaymentsCourse/courses`, {
         student_name: studentName,
         email: email,
         address: address,
@@ -486,7 +489,7 @@ function MyCourseDetail() {
     const fetchCourseUsers = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8080/api/getallcourseusers"
+                   `${API_URL}/PaymentsDepartments/getallcourseusers`
         );
         setCourse_users(response.data);
       } catch (error) {
@@ -552,8 +555,8 @@ function MyCourseDetail() {
             </div>
             <div className="col-lg-6 col-md-6 cl-sm-12 ">
               <div className="dep_teacher_coursedetails ">
-                <p className="dep_coursedetaile">{course.department_name}</p>
-                <p className="teacher_coursedetails">{course.teacher_name}</p>
+              <p className="dep_coursedetaile">{course.Department.title}</p>
+              <p className="teacher_coursedetails">{course.teacher.teacher_name}</p>
               </div>
               <h1 className="title_coursedetails">{course.subject_name}</h1>
               <div className="d-flex justify-content-around ">
@@ -621,7 +624,7 @@ function MyCourseDetail() {
                           }
                         >
                           <source
-                            src={`https://res.cloudinary.com/durjqlivi/video/upload/${videosData[0].defaultvideo}`} // Assuming first video is default
+                            src={`https://res.cloudinary.com/durjqlivi/video/upload/${videosData[0].course.defaultvideo}`} // Assuming first video is default
                             type="video/mp4"
                           />
                           Your browser does not support the video tag.
@@ -634,7 +637,7 @@ function MyCourseDetail() {
                                   {videosData[0].subject_name}
                                 </h2>
                                 <h3 className="teachar_after_purchase">
-                                  {videosData[0].teacher_name}
+                                {videosData[0].teacher.teacher_name}
                                 </h3>
                               </div>
                             </div>
@@ -666,10 +669,10 @@ function MyCourseDetail() {
                           <div>
                             <div className="d-flex justify-content-center">
                               <p className="after_price_coursedetails">
-                                {videosData[0].after_offer} دينار
+                              {videosData[0].course.after_offer} دينار
                               </p>
                               <p className="before_price_coursedetails">
-                                {videosData[0].before_offer} دينار
+                                {videosData[0].course.before_offer} دينار
                               </p>
                             </div>
                             <button
@@ -832,7 +835,7 @@ function MyCourseDetail() {
                                       {videosData[0].subject_name}
                                     </h2>
                                     <h3 className="teachar_after_purchase">
-                                      {videosData[0].teacher_name}
+                                    {videosData[0].teacher.teacher_name}
                                     </h3>
                                   </div>
                                 </div>
@@ -852,18 +855,18 @@ function MyCourseDetail() {
                                 {videosData[0].subject_name}
                               </h2>
                               <h3 className="teachar_after_purchase">
-                                {videosData[0].teacher_name}
+                              {videosData[0].teacher.teacher_name}
                               </h3>
                             </div>
                           ) : (
                             <div>
                               <div className="d-flex justify-content-center">
                                 <p className="after_price_coursedetails">
-                                  {videosData[0].after_offer} دينار
-                                </p>
-                                <p className="before_price_coursedetails">
-                                  {videosData[0].before_offer} دينار
-                                </p>
+                                {videosData[0].course.after_offer} دينار
+                              </p>
+                              <p className="before_price_coursedetails">
+                                {videosData[0].course.before_offer} دينار
+                              </p>
                               </div>
                               <button
                                 className="purchase_now_coursedetails"
@@ -1015,10 +1018,10 @@ function MyCourseDetail() {
                         </div>
                         <div className="col-lg-9 col-md-9 col-sm-12">
                           <p className="teacher_name_coursedetails">
-                            {course.teacher_name}{" "}
+                          {course.teacher.teacher_name}{" "}
                           </p>
                           <p className="desc_of_teacher_coursedetails">
-                            {course.teacher_descr}{" "}
+                            {course.teacher.teacher_descr}{" "}
                           </p>
                           <div className="d-flex">
                             <i

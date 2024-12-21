@@ -15,34 +15,7 @@ function Profile() {
     password: '',
     confirmPassword: '',
   });
-// useEffect(()=>{
-//   const fetchData = async () => {
-//     const token = localStorage.getItem('token');
-  
-//     if (!token) {
-//       console.log('No token found');
-//       return;
-//     }
-  
-//     try {
-//       const response = await fetch('http://localhost:8080/api/protected', {
-//         headers: { 'Authorization': `Bearer ${token}` }
-//       });
-  
-//       const data = await response.json();
-//       if (response.ok) {
-//         // Use the data
-//       } else {
-//         console.error(data.message);
-//         // Handle errors or expired token
-//         localStorage.removeItem('auth'); // Clear invalid token
-//       }
-//     } catch (error) {
-//       console.error('An error occurred:', error);
-//     }
-//   };
-// fetchData()  
-// },[])
+
   const [imageUrl, setImageUrl] = useState(null); // Initialize with defaultImage
 
   const fileInputRef = useRef(null);
