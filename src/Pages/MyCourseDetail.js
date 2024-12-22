@@ -64,7 +64,9 @@ function MyCourseDetail() {
 
     const fetchCommentCourses = async () => {
       try {
-        const response = await axios.get( `${API_URL}/commentCourse/getAllCommentCourses`);
+        const response = await axios.get(
+          `${API_URL}/commentCourse/getAllCommentCourses`
+        );
         const comments = response.data;
         const approvedComments = comments.filter(
           (comment) => comment.action === "approved"
@@ -302,13 +304,9 @@ function MyCourseDetail() {
       fetchStudentCount();
     }
   }, [courseId]);
-
   const fetchCourseDetails = async () => {
     try {
-      const response = await fetch(`${API_URL}/Courses/${id}`);
-      if (!response.ok) {
-        throw new Error("Failed to fetch blog details");
-      }
+      const response = await fetch(`${API_URL}/Courses/details/${id}`);
       const data = await response.json();
       setCourseDetails(data);
       settecherId(data[0].teacher_id);
@@ -374,18 +372,15 @@ function MyCourseDetail() {
   };
 
   const validateCouponCode = async (code) => {
-   try {
-       const response = await fetch(
-         `${API_URL}/PaymentsCourse/validate`,
-         {
-           method: "POST",
-           headers: {
-             "Content-Type": "application/json",
-           },
-           body: JSON.stringify({ coupon_code: couponCode, course_id: courseId }),
-         }
-       );
- 
+    try {
+      const response = await fetch(`${API_URL}/PaymentsCourse/validate`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ coupon_code: couponCode, course_id: courseId }),
+      });
+
       const data = await response.json();
 
       if (!response.ok) {
@@ -489,7 +484,7 @@ function MyCourseDetail() {
     const fetchCourseUsers = async () => {
       try {
         const response = await axios.get(
-                   `${API_URL}/PaymentsDepartments/getallcourseusers`
+          `${API_URL}/PaymentsDepartments/getallcourseusers`
         );
         setCourse_users(response.data);
       } catch (error) {
@@ -528,6 +523,7 @@ function MyCourseDetail() {
       setApprovedUser(user_courses);
     }
   }, [course_users, userId, courseId]); // Include `course` in dependency array if `course.expiration_date` is used
+  
 
   const handleCheckboxChange = (videoId) => {
     const newChecked = !checked[videoId];
@@ -555,8 +551,10 @@ function MyCourseDetail() {
             </div>
             <div className="col-lg-6 col-md-6 cl-sm-12 ">
               <div className="dep_teacher_coursedetails ">
-              <p className="dep_coursedetaile">{course.Department.title}</p>
-              <p className="teacher_coursedetails">{course.teacher.teacher_name}</p>
+                <p className="dep_coursedetaile">{course.Department.title}</p>
+                <p className="teacher_coursedetails">
+                  {course.teacher.teacher_name}
+                </p>
               </div>
               <h1 className="title_coursedetails">{course.subject_name}</h1>
               <div className="d-flex justify-content-around ">
@@ -637,7 +635,7 @@ function MyCourseDetail() {
                                   {videosData[0].subject_name}
                                 </h2>
                                 <h3 className="teachar_after_purchase">
-                                {videosData[0].teacher.teacher_name}
+                                  {videosData[0].course.teacher.teacher_name}
                                 </h3>
                               </div>
                             </div>
@@ -669,7 +667,7 @@ function MyCourseDetail() {
                           <div>
                             <div className="d-flex justify-content-center">
                               <p className="after_price_coursedetails">
-                              {videosData[0].course.after_offer} دينار
+                                {videosData[0].course.after_offer} دينار
                               </p>
                               <p className="before_price_coursedetails">
                                 {videosData[0].course.before_offer} دينار
@@ -835,7 +833,7 @@ function MyCourseDetail() {
                                       {videosData[0].subject_name}
                                     </h2>
                                     <h3 className="teachar_after_purchase">
-                                    {videosData[0].teacher.teacher_name}
+                                      {videosData[0].course.teacher.teacher_name}
                                     </h3>
                                   </div>
                                 </div>
@@ -855,18 +853,18 @@ function MyCourseDetail() {
                                 {videosData[0].subject_name}
                               </h2>
                               <h3 className="teachar_after_purchase">
-                              {videosData[0].teacher.teacher_name}
+                                {videosData[0].teacher.teacher_name}
                               </h3>
                             </div>
                           ) : (
                             <div>
                               <div className="d-flex justify-content-center">
                                 <p className="after_price_coursedetails">
-                                {videosData[0].course.after_offer} دينار
-                              </p>
-                              <p className="before_price_coursedetails">
-                                {videosData[0].course.before_offer} دينار
-                              </p>
+                                  {videosData[0].course.after_offer} دينار
+                                </p>
+                                <p className="before_price_coursedetails">
+                                  {videosData[0].course.before_offer} دينار
+                                </p>
                               </div>
                               <button
                                 className="purchase_now_coursedetails"
@@ -1018,7 +1016,7 @@ function MyCourseDetail() {
                         </div>
                         <div className="col-lg-9 col-md-9 col-sm-12">
                           <p className="teacher_name_coursedetails">
-                          {course.teacher.teacher_name}{" "}
+                            {course.teacher.teacher_name}{" "}
                           </p>
                           <p className="desc_of_teacher_coursedetails">
                             {course.teacher.teacher_descr}{" "}

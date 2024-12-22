@@ -21,7 +21,7 @@ function CardPrice() {
         const response = await axios.get(
           `${API_URL}/availablecards`
         );
-        const gov = response.data;
+        const gov = response.data.governorates;
         setGoverment(gov);
       } catch (error) {
         console.error("Error fetching library:", error);

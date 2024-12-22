@@ -99,9 +99,10 @@ function Blogs() {
         author: tag.author,
         descr: tag.descr,
         img: tag.img,
-        tag_name: tag.tag_name,
+        Tag: tag.Tag,
       }));
       setBlogs(mappedBlogs);
+
     } catch (error) {
       console.error("Failed to fetch blogs:", error);
     }
@@ -250,7 +251,7 @@ function Blogs() {
                                   {blog.title}
                                 </p>
                                 <small className="blog_dep">
-                                  {blog.tag_name}
+                                  {blog.Tag.tag_name}
                                 </small>
                               </div>
                               <div>

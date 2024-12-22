@@ -20,7 +20,8 @@ import { UserProvider } from './UserContext';
 import ForgotPassword from './Pages/ForgotPassword.js';
 import ResetPassword from './Pages/ResetPassword.js';
 import MyCourseDetail from './Pages/MyCourseDetail.js';
-export const API_URL='http://localhost:6060'
+// export const API_URL='http://localhost:6060'
+export const API_URL='https://backendba9ma.ba9maonline.com'
 
 const LazyLoadCSS = () => {
   const location = useLocation();

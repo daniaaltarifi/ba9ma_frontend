@@ -81,10 +81,9 @@ function Courses() {
   const handleClosePopupConf = () => {
     setShowPopupConf(false);
   };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+  
     // Error collection
     const errors = {};
     if (!studentName) errors.studentName = "اسم الطالب مطلوب";
@@ -93,7 +92,7 @@ function Courses() {
     if (!address) errors.address = "مكان السكن مطلوب";
     if (!phone || !/^\d+$/.test(phone)) errors.phone = "رقم الهاتف غير صحيح";
     if (!selectedDepartment) errors.department = "يرجى اختيار القسم";
-
+  
     // Update error states
     setStudentNameError(errors.studentName || "");
     setEmailError(errors.email || "");
@@ -101,17 +100,17 @@ function Courses() {
     setPhoneError(errors.phone || "");
     setDepartmentError(errors.department || "");
     setCouponError(errors.couponCode || "");
-
-    if (Object.keys(errors).length > 0) return; // Stop if errors exist
-
+  
+    // If there are errors, return early
+    if (Object.keys(errors).length > 0) return; 
+  
     // Validate coupon code and department ID
     try {
       const couponResponse = await axios.get(
         `${API_URL}/Coupons/getCouponByCode/${coupon_code}`
       );
       const couponData = couponResponse.data;
-
-      // Check if department ID from coupon matches selected department
+    // Check if department ID from coupon matches selected department
       if (couponData.department_id !== parseInt(selectedDepartment, 10)) {
         setCouponError("الكوبون لا ينطبق على هذا القسم");
         return;
@@ -122,7 +121,7 @@ function Courses() {
         setMessage("User ID not found. Please log in.");
         return;
       }
-
+  
       try {
         const response = await axios.post(
           `${API_URL}/PaymentsDepartments/buy`,
@@ -136,12 +135,12 @@ function Courses() {
             user_id: userId,
           }
         );
-
+  
         setMessage("Request was successful!");
         handleClose();
         setSmShow(true);
         setShowPopupConf(true);
-
+  
         // Clear form fields
         setStudentName("");
         setEmail("");
@@ -149,24 +148,105 @@ function Courses() {
         setPhone("");
         setCouponCode("");
       } catch (error) {
-        console.error(
-          "Error submitting form:",
-          error.response?.data || error.message
-        );
-        if (error.response?.data.error === "Invalid coupon code") {
-          setCouponError("رقم الكوبون غير صالح");
+        console.error("Error submitting form:", error.response?.data || error.message);
+        
+        if (error.response?.data?.error === "Invalid or already used coupon") {
+          setCouponError("رقم الكوبون غير صالح أو تم استخدامه من قبل");
         } else {
           setMessage("There was an error with your submission.");
         }
       }
     } catch (error) {
-      console.error(
-        "Error fetching coupon data:",
-        error.response?.data || error.message
-      );
+      console.error("Error fetching coupon data:", error.response?.data || error.message);
       setCouponError("حدث خطأ في التحقق من رقم الكوبون");
     }
   };
+  
+  // const handleSubmit = async (event) => {
+  //   event.preventDefault();
+
+  //   // Error collection
+  //   const errors = {};
+  //   if (!studentName) errors.studentName = "اسم الطالب مطلوب";
+  //   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
+  //     errors.email = "البريد الإلكتروني غير صحيح";
+  //   if (!address) errors.address = "مكان السكن مطلوب";
+  //   if (!phone || !/^\d+$/.test(phone)) errors.phone = "رقم الهاتف غير صحيح";
+  //   if (!selectedDepartment) errors.department = "يرجى اختيار القسم";
+
+  //   // Update error states
+  //   setStudentNameError(errors.studentName || "");
+  //   setEmailError(errors.email || "");
+  //   setAddressError(errors.address || "");
+  //   setPhoneError(errors.phone || "");
+  //   setDepartmentError(errors.department || "");
+  //   setCouponError(errors.couponCode || "");
+
+  //   if (Object.keys(errors).length > 0) return; // Stop if errors exist
+
+  //   // Validate coupon code and department ID
+  //   try {
+  //     const couponResponse = await axios.get(
+  //       `${API_URL}/Coupons/getCouponByCode/${coupon_code}`
+  //     );
+  //     const couponData = couponResponse.data;
+
+  //     // Check if department ID from coupon matches selected department
+  //     // if (couponData.department_id !== parseInt(selectedDepartment, 10)) {
+  //     //   setCouponError("الكوبون لا ينطبق على هذا القسم");
+  //     //   return;
+  //     // }
+  //     // Proceed with submission
+  //     const userId = localStorage.getItem("id");
+  //     if (!userId) {
+  //       setMessage("User ID not found. Please log in.");
+  //       return;
+  //     }
+
+  //     try {
+  //       const response = await axios.post(
+  //         `${API_URL}/PaymentsDepartments/buy`,
+  //         {
+  //           student_name: studentName,
+  //           email,
+  //           address,
+  //           phone,
+  //           coupon_code: coupon_code,
+  //           department_id: selectedDepartment,
+  //           user_id: userId,
+  //         }
+  //       );
+
+  //       setMessage("Request was successful!");
+  //       handleClose();
+  //       setSmShow(true);
+  //       setShowPopupConf(true);
+
+  //       // Clear form fields
+  //       setStudentName("");
+  //       setEmail("");
+  //       setAddress("");
+  //       setPhone("");
+  //       setCouponCode("");
+  //     } catch (error) {
+  //       console.error(
+  //         "Error submitting form:",
+  //         error.response?.data || error.message
+  //       );
+  //       if (error.response?.data.error === "Invalid coupon code") {
+  //         setCouponError("رقم الكوبون غير صالح");
+  //       } else {
+  //         setMessage("There was an error with your submission.");
+  //       }
+  //     }
+  //   } catch (error) {
+  //     console.error(
+  //       "Error fetching coupon data:",
+  //       error.response?.data || error.message
+  //     );
+  //     setCouponError("حدث خطأ في التحقق من رقم الكوبون");
+  //   }
+  // };
   const cardsPerSlide = 9; // Maximum cards per slide
   const [totalSlides, setTotalSlides] = useState(0);
   const title = "ادرس اون لاين مواد المناهج الدراسية الأردنية";

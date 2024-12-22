@@ -194,7 +194,7 @@ useEffect(() => {
                         {/* rating here */}
                         <p className="card-text card_dep">
                           {" "}
-                          {data.department_name}{" "}
+                          {data.department.title}
                         </p>
                       </div>
                       <div className="d-flex justify-content-between">
