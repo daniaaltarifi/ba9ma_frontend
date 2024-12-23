@@ -29,44 +29,49 @@ function Home() {
     };
     const fetchBasma = async () => {
       try {
-        const response = await axios.get(`${API_URL}/basmatrainning/basma-trainings/1`);
+        const response = await axios.get(
+          `${API_URL}/basmatrainning/basma-trainings/1`
+        );
         const data = response.data;
         setBasmaTraining(data);
-    
       } catch (error) {
         console.log(`Error getting data from frontend: ${error}`);
       }
     };
     fetchData();
-    fetchAbout()
-    fetchBasma()
+    fetchAbout();
+    fetchBasma();
   }, []);
 
   return (
     <>
       {/* About section */}
-      <div className="container text-center about-section"style={{ overflowX: "hidden" }}>
-            {about.map((abou)=>(
-        <div className="row ">
-
-          <div className="col-lg-5 col-md-6 col-sm-12"key={abou.id}>
-            <h2 className="about_title">{abou.title} </h2>
-            <p className="p_about">
-          {abou.descr}
-            </p>
+      <div
+        className="container text-center about-section"
+        style={{ overflowX: "hidden" }}
+      >
+        {about.map((abou) => (
+          <div className="row ">
+            <div className="col-lg-5 col-md-6 col-sm-12" key={abou.id}>
+              <h2 className="about_title">{abou.title} </h2>
+              <p className="p_about">{abou.descr}</p>
+            </div>
+            <div className="col-lg-7 col-md-6 col-sm-12 d-flex justify-content-md-center align-items-center">
+              <img
+                srcSet={
+                  about.img
+                    ? `https://res.cloudinary.com/durjqlivi/${about.img}?w=800 800w, https://res.cloudinary.com/durjqlivi/${about.img}?w=1600 1600w`
+                    : "placeholder.jpg"
+                }
+                sizes="(max-width: 768px) 100vw, 50vw"
+                alt="slider img"
+                className="img_home"
+                decoding="async"
+                loading="eager"
+              />
+            </div>
           </div>
-          <div className="col-lg-7 col-md-6 col-sm-12 d-flex justify-content-md-center align-items-center">
-            <img
-              src={`https://res.cloudinary.com/durjqlivi/${abou.img}`}
-              alt="about"
-              className="about_img img-fluid "
-              loading="lazy"
-            />
-          </div>
-          
-        </div>
-      ))}
-
+        ))}
       </div>
       {/* End About section */}
       {/* Home Box */}
@@ -91,13 +96,11 @@ function Home() {
           <div className="row">
             <div className="col">
               {faq.map((quesans) => (
-                <details >
+                <details>
                   <summary>{quesans.ques}</summary>
                   <div>{quesans.ans} </div>
                 </details>
               ))}
-
-           
             </div>
           </div>
         </div>
@@ -108,5 +111,12 @@ function Home() {
     </>
   );
 }
+
+<link
+  rel="preload"
+  href="https://res.cloudinary.com/durjqlivi/Basma_Academy/vjw9kbddxfco8wf96g7v?w=1600"
+  as="image"
+  type="image/jpeg"
+/>;
 
 export default Home;

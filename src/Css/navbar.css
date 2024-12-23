@@ -31,12 +31,13 @@ body{
   /* height: 25%; */
   width: 150px;
 }
-
 .logo_size {
-  max-width: 100%; /* Ensure the image does not exceed its container */
-  height: 100%;
+  max-width: 100%; /* تأكد من أن الصورة لا تتجاوز حدود الحاوية */
+  height: auto; /* الحفاظ على نسبة العرض إلى الارتفاع */
   width: 100%;
 }
+
+
 .img_icon_navbar{
   /* height: 5%; */
   width: 30px;

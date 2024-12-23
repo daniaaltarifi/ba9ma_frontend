@@ -21,7 +21,9 @@ function LandingPage() {
   }, [page]);
   const fetchBoxSLider = async () => {
     try {
-      const response = await axios.get(`${API_URL}/BoxUnderSliders/getBoxSliders`);
+      const response = await axios.get(
+        `${API_URL}/BoxUnderSliders/getBoxSliders`
+      );
       const data = response.data;
       setBoxUnderSlider(data);
     } catch (error) {
@@ -34,11 +36,9 @@ function LandingPage() {
       // if (storedData) {
       //   setSlider(JSON.parse(storedData)); // Use data from local storage
       // } else {
-        const response = await axios.get(
-          `${API_URL}/sliders/getAllSliders`
-        );
-        const data = response.data;
-        setSlider(data); // Assuming setTags is a function to update your state
+      const response = await axios.get(`${API_URL}/sliders/getAllSliders`);
+      const data = response.data;
+      setSlider(data); // Assuming setTags is a function to update your state
       //   localStorage.setItem("sliderData", JSON.stringify(data)); // Store data in local storage
       // }
     } catch (error) {
@@ -70,30 +70,41 @@ function LandingPage() {
         {slider.map((slide) => (
           <div className="slide-item">
             <img
-              src={`https://res.cloudinary.com/durjqlivi/${slide.slider_img}`}
-              alt={`slider img`}
-              className="img_home"
-              loading="lazy"
-            />
-
+                srcSet={
+                  slider.img
+                    ? `https://res.cloudinary.com/durjqlivi/${slide.img}?w=800 800w, https://res.cloudinary.com/durjqlivi/${slide.img}?w=1600 1600w`
+                    : "placeholder.jpg"
+                }
+                sizes="(max-width: 768px) 100vw, 50vw"
+                alt="slider img"
+                className="img_home"
+                decoding="async"
+                loading="eager"
+              />
             <div className="overlay" key={slide.id}>
               <div className="overlay-content">
                 {slide.img ? (
-                  <img
-                  src={`https://res.cloudinary.com/durjqlivi/${slide.img}`}
-
-                    alt={slide.title}
-                    height={"20%"}
-                    width={"20%"}
-                    loading="lazy"
-                  />
+                 <img
+                 srcSet={
+                   slider.img
+                     ? `https://res.cloudinary.com/durjqlivi/${slide.img}?w=800 800w, https://res.cloudinary.com/durjqlivi/${slide.img}?w=1600 1600w`
+                     : "placeholder.jpg"
+                 }
+                 sizes="(max-width: 768px) 100vw, 50vw"
+                 alt="slider img"
+                 className="img_home"
+                 decoding="async"
+                 loading="eager"
+               />
                 ) : (
                   <div className="placeholder-image">
                     <p></p>
                   </div>
                 )}{" "}
                 <h1 className="title_of_slidercomp">{slide.title}</h1>
-                <p className="paragraph_slider">{slide.descr}</p>
+                <p className="paragraph_slider">
+                  {slide.descr || "نحن هنا دائمًا لمساعدتك!"}
+                </p>
                 <button
                   className={`btn btn-s purple_btn ${
                     !slide.btn_name ? "hidden_btn" : ""
@@ -138,5 +149,10 @@ function LandingPage() {
     </>
   );
 }
+
+<link rel="preload" href="https://path-to-your-font.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+</link>
+
+
 
 export default LandingPage;
