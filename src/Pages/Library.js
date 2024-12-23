@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import React from "react";
 import SliderComp from "../components/SliderComp";
-import { useNavigate ,useLocation} from "react-router-dom";
+import { useNavigate ,useLocation, Link} from "react-router-dom";
 import "../Css/courses.css";
 
 import "slick-carousel/slick/slick.css";
@@ -224,8 +224,9 @@ useEffect(() => {
                                       day: "numeric",
                                     })}
                         </p>
+                        <Link target="blankk" to={`https://res.cloudinary.com/durjqlivi/image/upload/v1734943495/${data.file_book}`}>
                         <button
-                          onClick={() => handleDownload(data.file_book)}
+                          // onClick={() => handleDownload(data.file_book)}
                           style={{
                             backgroundColor: "#833988",
                             border: "none",
@@ -243,6 +244,7 @@ useEffect(() => {
                           ></i>
                           تحميل
                         </button>
+                        </Link>
                       </div>
                     </div>
                   </div>

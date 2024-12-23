@@ -1,5 +1,7 @@
 body{
   font-family: "Cairo", sans-serif;
+  font-display: swap;
+
 }
 
 /* Default styles (for larger screens) */

@@ -251,7 +251,7 @@ function Blogs() {
                                   {blog.title}
                                 </p>
                                 <small className="blog_dep">
-                                  {blog.Tag.tag_name}
+                                  {blog.Tag?.tag_name}
                                 </small>
                               </div>
                               <div>
