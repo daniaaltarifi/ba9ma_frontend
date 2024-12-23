@@ -78,13 +78,7 @@ function SliderComp() {
                   <h1 className="title_of_slidercomp">{slide.title}</h1>
                   <p
                     className="paragraph_slider"
-                    style={{
-                      fontSize: "16px",
-                      lineHeight: "1.5",
-                      color: "#333",
-                      margin: "10px 0",
-                      textAlign: "center",
-                    }}
+                  
                   >
                     {slide.descr || "نحن هنا دائمًا لمساعدتك!"}
                   </p>

@@ -38,6 +38,7 @@ function LandingPage() {
       // } else {
       const response = await axios.get(`${API_URL}/sliders/getAllSliders`);
       const data = response.data;
+      console.log("first",data)
       setSlider(data); // Assuming setTags is a function to update your state
       //   localStorage.setItem("sliderData", JSON.stringify(data)); // Store data in local storage
       // }
@@ -71,9 +72,7 @@ function LandingPage() {
           <div className="slide-item">
             <img
                 srcSet={
-                  slider.img
-                    ? `https://res.cloudinary.com/durjqlivi/${slide.img}?w=800 800w, https://res.cloudinary.com/durjqlivi/${slide.img}?w=1600 1600w`
-                    : "placeholder.jpg"
+                     `https://res.cloudinary.com/durjqlivi/${slide.slider_img}?w=800 800w, https://res.cloudinary.com/durjqlivi/${slide.slider_img}?w=1600 1600w`
                 }
                 sizes="(max-width: 768px) 100vw, 50vw"
                 alt="slider img"
@@ -86,9 +85,7 @@ function LandingPage() {
                 {slide.img ? (
                  <img
                  srcSet={
-                   slider.img
-                     ? `https://res.cloudinary.com/durjqlivi/${slide.img}?w=800 800w, https://res.cloudinary.com/durjqlivi/${slide.img}?w=1600 1600w`
-                     : "placeholder.jpg"
+                     `https://res.cloudinary.com/durjqlivi/${slide.img}?w=800 800w, https://res.cloudinary.com/durjqlivi/${slide.img}?w=1600 1600w`
                  }
                  sizes="(max-width: 768px) 100vw, 50vw"
                  alt="slider img"
@@ -100,11 +97,10 @@ function LandingPage() {
                   <div className="placeholder-image">
                     <p></p>
                   </div>
-                )}{" "}
+                )}
                 <h1 className="title_of_slidercomp">{slide.title}</h1>
-                <p className="paragraph_slider">
-                  {slide.descr || "نحن هنا دائمًا لمساعدتك!"}
-                </p>
+                <p className="paragraph_slider">{slide.descr}</p>
+
                 <button
                   className={`btn btn-s purple_btn ${
                     !slide.btn_name ? "hidden_btn" : ""
@@ -125,7 +121,7 @@ function LandingPage() {
       >
         <div className="row">
           {boxUnderSlider.map((box) => (
-            <div className="col-lg-4 col-md-12 col-sm-12">
+            <div className="col-lg-4 col-md-12 col-sm-12" key={box.id}>
               <div className="row d-flex justify-content-center">
                 <div className="col-lg-2 col-md-12 col-sm-12 vector_cont">
                   <img

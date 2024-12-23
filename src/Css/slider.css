@@ -20,18 +20,17 @@
   object-fit: cover; /* Ensures the image covers the container without stretching */
   display: block; /* Ensures the image behaves as a block element */
 }
-.title_of_slidercomp {
-  font-family: "CustomFont", sans-serif;
-  font-weight: bold;
-  font-size: 1.5rem; 
-  line-height: 1.5;
-  color: #333;
-  visibility: visible;
-  font-display: swap; 
-  will-change: transform; 
-  transition: transform 0.3s ease; 
+.title_of_slidercomp{
+  /* font-size: 520vh;  */
+  font-weight: 700;
+  line-height: 73px;
 }
-
+.paragraph_slider{
+  font-size: 16px;
+  font-weight: 500px;
+  line-height: 30px;
+  color: #fff !important;
+}
 .overlay {
   position: absolute;
   top: 0;
@@ -94,50 +93,24 @@
   background-color: #833988;
   border-radius: 22px;
   position: absolute;
-  bottom: -40px; 
-  left: 50%; 
-  transform: translateX(-50%); 
+  bottom: -40px; /* Position it initially below the bottom */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Center horizontally */
   padding: 20px;
-  width: 100%;
-  max-width: 1300px;
+  width: 100%; /* Adjust width as needed */
+  max-width: 1300px; /* Max width to limit on larger screens */
 }
 .h_box_slider {
   color: #f57d20;
   text-align: right;
   font-weight: bold;
-
-  font-family: "Arial", sans-serif; 
-  transition: opacity 0.3s ease-in-out; 
-  opacity: 0; 
 }
-
-
-.h_box_slider.visible {
-  opacity: 1;
-}
-
-
 .p_box_slider {
+  color: #fff;
   text-align: right;
-  font-size: 16px;
-  line-height: 1.5;
-  font-family: "CustomFont", sans-serif;
-  color: #333;
-  opacity: 0;
-  transition: opacity 0.3s ease-in-out; 
-  margin: 10px 0;
-  display: block;
-  will-change: transform, opacity; 
+  font-size: 12px;
+  line-height: 28px;
 }
-
-
-.p_box_slider.visible {
-  opacity: 1;
-}
-
-
-
-
 
 .vector_cont {
   background-color: #a767ac;
@@ -171,23 +144,3 @@
   line-height: 25px;
   }
  }
-
-
- .paragraph_slider {
-  font-size: 16px;
-  line-height: 1.5;
-  color: #333;
-  margin: 10px 0;
-  text-align: center;
-  font-family: "CustomFont", sans-serif;
-  visibility: hidden;
-  font-display: swap;
-  opacity: 0;
-  transition: opacity 0.3s ease; 
-}
-
-.paragraph_slider.visible {
-  visibility: visible;
-  opacity: 1; 
-}
-

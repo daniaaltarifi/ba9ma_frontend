@@ -59,9 +59,7 @@ function Home() {
             <div className="col-lg-7 col-md-6 col-sm-12 d-flex justify-content-md-center align-items-center">
               <img
                 srcSet={
-                  about.img
-                    ? `https://res.cloudinary.com/durjqlivi/${about.img}?w=800 800w, https://res.cloudinary.com/durjqlivi/${about.img}?w=1600 1600w`
-                    : "placeholder.jpg"
+                     `https://res.cloudinary.com/durjqlivi/${abou.img}?w=800 800w, https://res.cloudinary.com/durjqlivi/${abou.img}?w=1600 1600w`
                 }
                 sizes="(max-width: 768px) 100vw, 50vw"
                 alt="slider img"
