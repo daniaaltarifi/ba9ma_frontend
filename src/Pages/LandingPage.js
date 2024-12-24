@@ -12,44 +12,39 @@ function LandingPage() {
   const [slider, setSlider] = useState([]);
   const [boxUnderSlider, setBoxUnderSlider] = useState([]);
   const navigate = useNavigate();
-
   const location = useLocation();
   const page = location.pathname;
+
   useEffect(() => {
     window.scrollTo(0, 0);
-    // fetchSlider(page).then(data => setSlider(data)); // Assuming data is an array
   }, [page]);
+
   const fetchBoxSLider = async () => {
     try {
-      const response = await axios.get(
-        `${API_URL}/BoxUnderSliders/getBoxSliders`
-      );
+      const response = await axios.get(`${API_URL}/BoxUnderSliders/getBoxSliders`);
       const data = response.data;
       setBoxUnderSlider(data);
     } catch (error) {
       console.log(`Error getting data from frontend: ${error}`);
     }
   };
+
   const fetchSlider = async () => {
     try {
-      // const storedData = localStorage.getItem("sliderData");
-      // if (storedData) {
-      //   setSlider(JSON.parse(storedData)); // Use data from local storage
-      // } else {
       const response = await axios.get(`${API_URL}/sliders/getAllSliders`);
       const data = response.data;
-      console.log("first",data)
-      setSlider(data); // Assuming setTags is a function to update your state
-      //   localStorage.setItem("sliderData", JSON.stringify(data)); // Store data in local storage
-      // }
+      console.log("first", data);
+      setSlider(data);
     } catch (error) {
       console.error("Failed to fetch slider:", error);
     }
   };
+
   useEffect(() => {
     fetchBoxSLider();
     fetchSlider();
   }, []);
+
   const settings = {
     dots: true,
     infinite: true,
@@ -60,39 +55,49 @@ function LandingPage() {
     nextArrow: false,
     prevArrow: false,
   };
+
   const handleOrderCardBtn = (pagelink) => {
     navigate(`${pagelink}#order-section`);
   };
+
   return (
     <>
-      <Slider {...settings} style={{ overflow: "hidden" }}>
-        {/* <div className="fixed_image_slider"></div> */}
+      {/* Preload first image for better LCP */}
+      {slider[0] && (
+        <link
+          rel="preload"
+          href={`https://res.cloudinary.com/durjqlivi/${slider[0].slider_img}?w=1600&f_auto&q_auto`}
+          as="image"
+          type="image/webp"
+          crossorigin="anonymous"
+        />
+      )}
 
+      {/* Slider Section */}
+      <Slider {...settings} style={{ overflow: "hidden" }}>
         {slider.map((slide) => (
-          <div className="slide-item">
+          <div className="slide-item" key={slide.id}>
             <img
-                srcSet={
-                     `https://res.cloudinary.com/durjqlivi/${slide.slider_img}?w=800 800w, https://res.cloudinary.com/durjqlivi/${slide.slider_img}?w=1600 1600w`
-                }
-                sizes="(max-width: 768px) 100vw, 50vw"
-                alt="slider img"
-                className="img_home"
-                decoding="async"
-                loading="eager"
-              />
-            <div className="overlay" key={slide.id}>
+              srcSet={`https://res.cloudinary.com/durjqlivi/${slide.slider_img}?w=800&f_auto&q_auto 800w,
+                       https://res.cloudinary.com/durjqlivi/${slide.slider_img}?w=1600&f_auto&q_auto 1600w`}
+              sizes="(max-width: 768px) 100vw, 50vw"
+              alt="slider img"
+              className="img_home"
+              decoding="async"
+              loading="eager"
+            />
+            <div className="overlay">
               <div className="overlay-content">
                 {slide.img ? (
-                 <img
-                 srcSet={
-                     `https://res.cloudinary.com/durjqlivi/${slide.img}?w=800 800w, https://res.cloudinary.com/durjqlivi/${slide.img}?w=1600 1600w`
-                 }
-                 sizes="(max-width: 768px) 100vw, 50vw"
-                 alt="slider img"
-                 className="img_home"
-                 decoding="async"
-                 loading="eager"
-               />
+                  <img
+                    srcSet={`https://res.cloudinary.com/durjqlivi/${slide.img}?w=800&f_auto&q_auto 800w,
+                             https://res.cloudinary.com/durjqlivi/${slide.img}?w=1600&f_auto&q_auto 1600w`}
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    alt="slider img"
+                    className="img_home"
+                    decoding="async"
+                    loading="eager"
+                  />
                 ) : (
                   <div className="placeholder-image">
                     <p></p>
@@ -100,11 +105,8 @@ function LandingPage() {
                 )}
                 <h1 className="title_of_slidercomp">{slide.title}</h1>
                 <p className="paragraph_slider">{slide.descr}</p>
-
                 <button
-                  className={`btn btn-s purple_btn ${
-                    !slide.btn_name ? "hidden_btn" : ""
-                  }`}
+                  className={`btn btn-s purple_btn ${!slide.btn_name ? "hidden_btn" : ""}`}
                   onClick={() => handleOrderCardBtn(slide.page)}
                   style={{ display: slide.btn_name ? "inline-block" : "none" }}
                 >
@@ -115,10 +117,9 @@ function LandingPage() {
           </div>
         ))}
       </Slider>
-      <div
-        className="container text-center slider_box"
-        style={{ overflowX: "hidden" }}
-      >
+
+      {/* Box Under Slider Section */}
+      <div className="container text-center slider_box" style={{ overflowX: "hidden" }}>
         <div className="row">
           {boxUnderSlider.map((box) => (
             <div className="col-lg-4 col-md-12 col-sm-12" key={box.id}>
@@ -132,7 +133,7 @@ function LandingPage() {
                   />
                 </div>
                 <div className="col-lg-10 col-md-12 col-sm-12">
-                  <h5 className="h_box_slider"> {box.title} </h5>
+                  <h5 className="h_box_slider">{box.title}</h5>
                   <p className="p_box_slider">{box.descr}</p>
                 </div>
               </div>
@@ -140,15 +141,11 @@ function LandingPage() {
           ))}
         </div>
       </div>
-      {/* End slider section */}
+
+      {/* Home Section */}
       <Home />
     </>
   );
 }
-
-<link rel="preload" href="https://path-to-your-font.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-</link>
-
-
 
 export default LandingPage;
