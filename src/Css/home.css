@@ -19,6 +19,12 @@
   line-height: 48px;
   text-align: center;
 }
+.about_img{
+  height: 350px;
+  width: 80%;
+  border-radius: 20px;
+  object-fit: contain;
+}
 /* End about section *****************************/
 /* Home box */
 .margin_section {
@@ -236,7 +242,7 @@ details[open] summary:before {
     line-height: 23px;
     font-family: "CustomFont", sans-serif;
     font-size: 1em;
-    color: #333;
+    color: #fff;
     line-height: 1.5;
     visibility: visible; 
   }

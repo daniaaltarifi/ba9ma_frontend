@@ -63,7 +63,7 @@ function Home() {
                 }
                 sizes="(max-width: 768px) 100vw, 50vw"
                 alt="slider img"
-                className="img_home"
+                className="about_img"
                 decoding="async"
                 loading="eager"
               />

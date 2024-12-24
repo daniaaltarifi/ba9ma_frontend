@@ -38,7 +38,7 @@ function LandingPage() {
       // } else {
       const response = await axios.get(`${API_URL}/sliders/getAllSliders`);
       const data = response.data;
-      console.log("first",data)
+      console.log("first", data);
       setSlider(data); // Assuming setTags is a function to update your state
       //   localStorage.setItem("sliderData", JSON.stringify(data)); // Store data in local storage
       // }
@@ -71,28 +71,25 @@ function LandingPage() {
         {slider.map((slide) => (
           <div className="slide-item">
             <img
-                srcSet={
-                     `https://res.cloudinary.com/durjqlivi/${slide.slider_img}?w=800 800w, https://res.cloudinary.com/durjqlivi/${slide.slider_img}?w=1600 1600w`
-                }
-                sizes="(max-width: 768px) 100vw, 50vw"
-                alt="slider img"
-                className="img_home"
-                decoding="async"
-                loading="eager"
-              />
+              srcSet={`https://res.cloudinary.com/durjqlivi/${slide.slider_img}?w=800 800w, https://res.cloudinary.com/durjqlivi/${slide.slider_img}?w=1600 1600w`}
+              sizes="(max-width: 768px) 100vw, 50vw"
+              alt="slider img"
+              className="img_home"
+              decoding="async"
+              loading="eager"
+            />
             <div className="overlay" key={slide.id}>
               <div className="overlay-content">
                 {slide.img ? (
-                 <img
-                 srcSet={
-                     `https://res.cloudinary.com/durjqlivi/${slide.img}?w=800 800w, https://res.cloudinary.com/durjqlivi/${slide.img}?w=1600 1600w`
-                 }
-                 sizes="(max-width: 768px) 100vw, 50vw"
-                 alt="slider img"
-                 className="img_home"
-                 decoding="async"
-                 loading="eager"
-               />
+                  <img
+                    srcSet={`https://res.cloudinary.com/durjqlivi/${slide.img}?w=800 800w, https://res.cloudinary.com/durjqlivi/${slide.img}?w=1600 1600w`}
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    alt="slider img"
+                    height={"20%"}
+                    width={"20%"}
+                    decoding="async"
+                    loading="eager"
+                  />
                 ) : (
                   <div className="placeholder-image">
                     <p></p>
@@ -146,9 +143,12 @@ function LandingPage() {
   );
 }
 
-<link rel="preload" href="https://path-to-your-font.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-</link>
-
-
+<link
+  rel="preload"
+  href="https://path-to-your-font.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin="anonymous"
+></link>;
 
 export default LandingPage;

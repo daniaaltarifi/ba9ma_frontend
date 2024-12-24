@@ -13,12 +13,7 @@ line-height: 48px;
     text-align: center;
 }
 
-.about_img{
-    height: 350px;
-    width: 80%;
-    border-radius: 20px;
-    object-fit: contain;
-}
+
 @media screen and (max-width:768px) {
     .paragraph_who{
         font-size: 15px;

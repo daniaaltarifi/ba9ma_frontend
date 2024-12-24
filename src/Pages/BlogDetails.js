@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../Css/blogDetails.css";
+import "../Css/courseDetails.css";
 import { FaFacebookF } from "react-icons/fa";
 import { FaPinterestP } from "react-icons/fa";
 import { FaYoutube } from "react-icons/fa";
