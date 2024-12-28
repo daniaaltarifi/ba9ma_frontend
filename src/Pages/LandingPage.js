@@ -125,10 +125,9 @@ function LandingPage() {
               <div className="row d-flex justify-content-center">
                 <div className="col-lg-2 col-md-12 col-sm-12 vector_cont">
                   <img
-                    src={require("../assets/vectorBook.png")}
+                    src={require("../assets/vectorBook.webp")}
                     alt="vector book"
                     className="vector_icon"
-                    loading="lazy"
                   />
                 </div>
                 <div className="col-lg-10 col-md-12 col-sm-12">

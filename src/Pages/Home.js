@@ -52,7 +52,8 @@ function Home() {
     const preloadImage = document.createElement("link");
     preloadImage.rel = "preload";
     preloadImage.as = "image";
-    preloadImage.href = "https://res.cloudinary.com/durjqlivi/Basma_Academy/kmg1us6gsvfd1kt2w2be?w=800&f_auto&q_auto:eco";
+    preloadImage.href =
+      "https://res.cloudinary.com/durjqlivi/Basma_Academy/kmg1us6gsvfd1kt2w2be?w=800&f_auto&q_auto:eco";
     preloadImage.crossOrigin = "anonymous";
     document.head.appendChild(preloadImage);
   }, [about]);
@@ -63,34 +64,31 @@ function Home() {
         className="container text-center about-section"
         style={{ overflowX: "hidden" }}
       >
-      {about.map((abou) => (
+        {about.map((abou) => (
           <div className="row" key={abou.id}>
             <div className="col-lg-5 col-md-6 col-sm-12">
               <h2 className="about_title">{abou.title}</h2>
               <p className="p_about">{abou.descr}</p>
             </div>
-            <div className="col-lg-7 col-md-6 col-sm-12 d-flex justify-content-md-center align-items-center">
-                <img
-                  srcSet={`
-                  https://res.cloudinary.com/durjqlivi/Basma_Academy/${abou.img}?w=400&f_auto&q_auto:eco 400w,
-                  https://res.cloudinary.com/durjqlivi/Basma_Academy/${abou.img}?w=800&f_auto&q_auto:eco 800w,
-                  https://res.cloudinary.com/durjqlivi/Basma_Academy/${abou.img}?w=1600&f_auto&q_auto:eco 1600w
+           <div className="col-lg-7 col-md-6 col-sm-12 d-flex justify-content-md-center align-items-center">
+           <img
+                srcSet={`
+                  https://res.cloudinary.com/durjqlivi/${abou.img}?w=400&f_auto&q_auto:eco 400w,
                 `}
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  src="https://res.cloudinary.com/durjqlivi/Basma_Academy/kmg1us6gsvfd1kt2w2be?w=800&f_auto&q_auto:eco"
-                  alt="slider img"
-                  className="about_img"
-                  decoding="async"
-                  loading="eager"
-                />
-          
-            </div>
+                sizes="(max-width: 768px) 100vw, 50vw"
+                src="https://res.cloudinary.com/durjqlivi/Basma_Academy/kmg1us6gsvfd1kt2w2be?w=800&f_auto&q_auto:eco"
+                alt="slider img"
+                className="about_img"
+                decoding="async"
+                loading="eager"
+              />
+          </div>
           </div>
         ))}
       </div>
       {/* End About section */}
-       {/* Home Box */}
-       {basmatrainig.length === 0 ? (
+      {/* Home Box */}
+      {basmatrainig.length === 0 ? (
         <div>Loading...</div> // Display loading state
       ) : (
         basmatrainig.map((item) => (
@@ -124,7 +122,6 @@ function Home() {
 
       <StudentsOpinions />
     </>
-    
   );
 }
 

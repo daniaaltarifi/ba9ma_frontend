@@ -394,7 +394,6 @@ function Courses() {
   useEffect(() => {}, [courses, searchResults, dataToDisplay]);
 
   const [slider, setSlider] = useState([]);
-  const page = location.pathname;
   const { hash } = useLocation();
 
   useEffect(() => {

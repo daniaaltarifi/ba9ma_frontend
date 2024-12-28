@@ -4,6 +4,7 @@
   margin-top: 7%;
   width: 100%;
   background-color: #fff; /* Set background color as needed */
+  overflow-x: hidden;
 }
 
 .about_title {
