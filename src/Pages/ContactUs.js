@@ -105,7 +105,7 @@ useEffect(() => {
                   <div className="d-flex ">
                     <div className="icon_cont_contact">
                       <img
-                        src={require("../assets/facebook.png")}
+                        src={require("../assets/facebook.webp")}
                         alt="phone"
                         className="img-fluid icon_contact"
                         loading="lazy"
@@ -121,7 +121,7 @@ useEffect(() => {
                   <div className="d-flex ">
                     <div className="icon_cont_contact">
                       <img
-                        src={require("../assets/email.png")}
+                        src={require("../assets/email.webp")}
                         alt="phone"
                         className="img-fluid icon_contact"
                         loading="lazy"

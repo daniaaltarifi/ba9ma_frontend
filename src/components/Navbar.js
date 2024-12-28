@@ -115,14 +115,10 @@ function Navbar({ handleLogout }) {
             </ul>
             <div className="logo_container">
               <Link to="/">
-                <img
-                  srcSet={`${require("../assets/logo.webp")} 300w,
-           ${require("../assets/logo.webp")} 600w,
-           ${require("../assets/logo.webp")} 1200w`}
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 300px"
-                  alt="Company Logo"
-                  className="logo_size"
-                  decoding="async"
+                <link
+                  rel="preload"
+                  as="image"
+                  href="/static/media/logo.c9b1740140cc263eefb1.webp"
                 />
               </Link>
             </div>
@@ -133,6 +129,6 @@ function Navbar({ handleLogout }) {
   );
 }
 
-<link rel="preload" href="path_to_your_image.webp" as="image"/>
+<link rel="preload" href="path_to_your_image.webp" as="image" />;
 
 export default Navbar;
