@@ -111,10 +111,13 @@ function Courses() {
       );
       const couponData = couponResponse.data;
     // Check if department ID from coupon matches selected department
-      if (couponData.department_id !== parseInt(selectedDepartment, 10)) {
-        setCouponError("الكوبون لا ينطبق على هذا القسم");
-        return;
-      }
+    const couponDepartmentId = parseInt(couponData.department_id, 10);
+    const selectedDepartmentId = parseInt(selectedDepartment, 10);
+    // Check if department ID from coupon matches selected department
+    if (couponDepartmentId !== selectedDepartmentId) {
+      setCouponError("الكوبون لا ينطبق على هذا القسم");
+      return;
+    }
       // Proceed with submission
       const userId = localStorage.getItem("id");
       if (!userId) {
@@ -149,10 +152,12 @@ function Courses() {
         setCouponCode("");
       } catch (error) {
         console.error("Error submitting form:", error.response?.data || error.message);
-        
-        if (error.response?.data?.error === "Invalid or already used coupon") {
+                if (error.response?.data?.error === "Invalid or already used coupon") {
           setCouponError("رقم الكوبون غير صالح أو تم استخدامه من قبل");
-        } else {
+        } 
+        else if (error.response?.data?.error === "No courses found for this department") {
+          setCouponError("لا توجد أي دورات متاحة لهذا القسم");}
+        else {
           setMessage("There was an error with your submission.");
         }
       }
@@ -177,8 +182,6 @@ function Courses() {
     if (departmentId && teacherEmail) {
       // Both department and teacher filters are selected
       url = `${API_URL}/Courses/filter/${departmentId}/${teacherEmail}`;
-      console.log("Filtering by Department and Teacher:", url);
-
     } else if (departmentId) {
       // Only department filter is selected
       url = `${API_URL}/Courses/getbydep/${departmentId}`;
@@ -360,12 +363,9 @@ function Courses() {
   const handleTeacher = (e) => {
     const selectedTeacherId = e.target.value;
     setSelectedTeacher(selectedTeacherId);
-console.log("first", selectedTeacherId)
-console.log("first", teacherData)
     const teacher = teacherData.find(
       (tech) => tech.teacher_id.toString() === selectedTeacherId
     );
-    console.log("teach",teacher)
     if (teacher) {
       setSelectedTeacherEmail(teacher.email);
     } else {

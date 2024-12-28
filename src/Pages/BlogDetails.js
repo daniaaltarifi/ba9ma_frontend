@@ -35,7 +35,6 @@ function BlogDetails() {
           });
           data.createdAt = formattedDate; // Overwrite the createdAt field with formatted date
         }
-        console.log("data: ", data);
       } catch (error) {
         console.error("Error fetching blog details:", error);
       }

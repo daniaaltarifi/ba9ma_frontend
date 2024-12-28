@@ -94,15 +94,15 @@ function Blogs() {
       );
       const blogs = response.data;
       const mappedBlogs = blogs.map((tag) => ({
-        id: tag.blog_id, // Adjust as needed
+        id: tag.id, // Adjust as needed
         title: tag.title,
         author: tag.author,
         descr: tag.descr,
         img: tag.img,
-        Tag: tag.Tag,
+        Tags: tag.Tags,
+        createdAt: tag.createdAt,
       }));
       setBlogs(mappedBlogs);
-
     } catch (error) {
       console.error("Failed to fetch blogs:", error);
     }
@@ -156,7 +156,6 @@ function Blogs() {
   const startIndex = currentSlideIndex * blogsPerSlide;
   const endIndex = startIndex + blogsPerSlide;
   const visibleBlogs = displayBlogs.slice(startIndex, endIndex);
-
   return (
     <>
       {/* header */}
@@ -174,7 +173,7 @@ function Blogs() {
           <div className="row ">
             <div className="col-lg-8 col-md-12 col-sm-12 col_blog">
               {/* search */}
-              <div className="row">
+              {/* <div className="row">
                 <div className="col-lg-7 col-md-12 col-sm-12">
                   <h1 className="title_blog">جميع المقالات</h1>
                 </div>
@@ -225,7 +224,63 @@ function Blogs() {
                     )}
                   </div>
                 </div>
+              </div> */}
+              {/* search */}
+              <div className="row">
+                <div className="col-lg-7 col-md-12 col-sm-12">
+                  <h1 className="title_blog">جميع المقالات</h1>
+                </div>
+                <div className="col-lg-5 col-md-12 col-sm-12">
+                  <div className="navbar__search">
+                    <span>
+                      <i
+                        className="fa-solid fa-magnifying-glass fa-sm"
+                        style={{ color: "#833988" }}
+                      ></i>{" "}
+                    </span>
+                    <input
+                      type="text"
+                      placeholder="ابحث عن موضوع"
+                      value={searchQuery}
+                      className="search_blog"
+                      onChange={handleInputChange}
+                    />
+                    <a
+                      className="btn btn-s purple_btn search_btn_blog"
+                      onChange={handleInputChange}
+                    >
+                      بحث{" "}
+                    </a>
+                    {searchQuery && (
+                      <ul className="search_dropdown">
+                        {searchResults.length > 0 ? (
+                          searchResults.map((blog) => (
+                            <li
+                              key={blog.id}
+                              onClick={() => {
+                                navigate(`/blogdetails/${blog.id}`);
+                                window.scrollTo(0, 0);
+                              }}
+                            >
+                              <img
+                                src={`https://res.cloudinary.com/durjqlivi/${blog.img}`}
+                                alt={blog.title}
+                                loading="lazy"
+                                height={"50px"}
+                                width={"50px"}
+                              />
+                              {blog.title}
+                            </li>
+                          ))
+                        ) : (
+                          <li>No blogs found.</li>
+                        )}
+                      </ul>
+                    )}
+                  </div>
+                </div>
               </div>
+              {/* End search */}
               {/* End search */}
               {visibleBlogs.map((blog, index) => (
                 <Link
@@ -250,9 +305,15 @@ function Blogs() {
                                 <p className="card-title blog_title">
                                   {blog.title}
                                 </p>
-                                <small className="blog_dep">
-                                  {blog.Tag?.tag_name}
-                                </small>
+                                {blog.Tags && blog.Tags.length > 0 ? (
+                                  blog.Tags.map((tag, index) => (
+                                    <small key={index} className="blog_dep">
+                                      {tag.tag_name}.
+                                    </small>
+                                  ))
+                                ) : (
+                                  <p className="details_blogs_card">No tags</p>
+                                )}
                               </div>
                               <div>
                                 <h5 className=" teacher_name_blog">

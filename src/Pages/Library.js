@@ -226,7 +226,6 @@ useEffect(() => {
                         </p>
                         <Link target="blankk" to={`https://res.cloudinary.com/durjqlivi/image/upload/v1734943495/${data.file_book}`}>
                         <button
-                          // onClick={() => handleDownload(data.file_book)}
                           style={{
                             backgroundColor: "#833988",
                             border: "none",

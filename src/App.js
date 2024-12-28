@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import LandingPage from "./Pages/LandingPage.js";
-// import Courses from "./Pages/Courses.js";
+import Courses from "./Pages/Courses.js";
 
 import Footer from "./components/Footer.js";
 // import CourseDetails from "./Pages/CourseDetails.js";
@@ -28,7 +28,7 @@ import { UserProvider } from "./UserContext";
 // import MyCourseDetail from "./Pages/MyCourseDetail.js";
 // export const API_URL = "http://localhost:6060";
 export const API_URL='https://backendba9ma.ba9maonline.com'
-const Courses = React.lazy(() => import("./Pages/Courses.js"));
+// const Courses = React.lazy(() => import("./Pages/Courses.js"));
 const CourseDetails = React.lazy(() => import("./Pages/CourseDetails.js"));
 const WhoWeAre = React.lazy(() => import("./Pages/WhoWeAre.js"));
 // const Blogs = React.lazy(() => import("./Pages/Blogs.js"));

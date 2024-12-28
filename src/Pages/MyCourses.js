@@ -209,9 +209,9 @@ function MyCourses() {
               >
                 <div className="card card_cont">
                   <img
-                    src={`https://res.cloudinary.com/durjqlivi/${course.course.img}`}
+                    src={`https://res.cloudinary.com/durjqlivi/${course.course?.img}`}
                     className="card-img-top img-fluid card_img"
-                    alt={course.course.subject_name}
+                    alt={course.course?.subject_name}
                     loading="lazy"
                   />
                   <div className="card-body">
@@ -223,7 +223,7 @@ function MyCourses() {
                     </div>
                     <div className="d-flex justify-content-between">
                       <p className="course_title_card">
-                        {course.course.subject_name}
+                        {course.course?.subject_name}
                       </p>
                       <p className="teacher_name_card">
                         {course.course?.teacher?.teacher_name}
@@ -251,7 +251,7 @@ function MyCourses() {
                       ></i>{" "}
                       <p className="details_courses_card">
                         {new Date(
-                          course.course.created_at
+                          course.course?.created_at
                         ).toLocaleDateString()}
                       </p>
                     </div>

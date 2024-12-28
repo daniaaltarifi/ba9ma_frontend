@@ -60,26 +60,40 @@ function SliderComp() {
         <Slider {...settings} style={{ overflow: "hidden" }}>
           {slider.map((slide) => (
             <div className="slide-item" key={slide.id}>
-              <img
-                srcSet={
-                  slide.slider_img
-                    ? `https://res.cloudinary.com/durjqlivi/${slide.slider_img}?w=800 800w,
-                       https://res.cloudinary.com/durjqlivi/Basma_Academy/image?w=1600 1600w`
-                    : "placeholder.jpg"
-                }
+              {slide.slider_img ? (
+                <img
+                  srcSet={
+                    slide.slider_img
+                      ? `https://res.cloudinary.com/durjqlivi/${slide.slider_img}?w=800&f_auto&q_auto 800w,
+                      https://res.cloudinary.com/durjqlivi/${slide.slider_img}?w=1600&f_auto&q_auto 1600w`
+                      : "https://example.com/placeholder.jpg"
+                  }
+                  src={
+                    slide.slider_img
+                      ? `https://res.cloudinary.com/durjqlivi/${slide.slider_img}?f_auto&q_auto`
+                      : "https://example.com/placeholder.jpg"
+                  }
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  alt="slider img"
+                  className="img_home"
+                  decoding="async"
+                  loading="lazy"
+                />
+              ) : (
+                <img
+                srcSet={`https://res.cloudinary.com/durjqlivi/${slide.img}?w=800&f_auto&q_auto 800w, https://res.cloudinary.com/durjqlivi/${slide.img}?w=1600&f_auto&q_auto 1600w`}
                 sizes="(max-width: 768px) 100vw, 50vw"
                 alt="slider img"
                 className="img_home"
                 decoding="async"
+                loading="lazy"
               />
+              )}
 
               <div className="overlay">
                 <div className="overlay-content">
                   <h1 className="title_of_slidercomp">{slide.title}</h1>
-                  <p
-                    className="paragraph_slider"
-                  
-                  >
+                  <p className="paragraph_slider">
                     {slide.descr || "نحن هنا دائمًا لمساعدتك!"}
                   </p>
                 </div>
@@ -91,6 +105,12 @@ function SliderComp() {
     </div>
   );
 }
-<link rel="preload" href="path-to-your-font.woff2" as="font" type="font/woff2" crossorigin="anonymous"></link>
+<link
+  rel="preload"
+  href="path-to-your-font.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin="anonymous"
+></link>;
 
 export default SliderComp;

@@ -18,6 +18,7 @@ function WhoWeAre() {
         `${API_URL}/basmatrainning/basma-trainings/2`
       );
       const data = response.data;
+      console.log(data)
       setBasmaTraining(data);
     } catch (error) {
       console.log(`Error getting data from frontend: ${error}`);
@@ -37,7 +38,7 @@ function WhoWeAre() {
       const response = await axios.get(
         `${API_URL}/aboutTeacher/getaboutteacher`
       );
-      setAboutTeacher(response.data.aboutTeachers);
+      setAboutTeacher(response.data);
     } catch (error) {
       console.error("Error fetching departments:", error);
     }

@@ -108,7 +108,6 @@ function CourseDetails() {
         }
         const data = await response.json();
         setVideosData(data);
-        console.log("first video", data);
         const initialChecked = {};
         data.forEach((item) => {
           const storedState = localStorage.getItem(`checkbox-${item.id}`);

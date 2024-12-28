@@ -521,6 +521,7 @@ function MyCourseDetail() {
           user.course_id === courseId
       );
       setApprovedUser(user_courses);
+      
     }
   }, [course_users, userId, courseId]); // Include `course` in dependency array if `course.expiration_date` is used
   
@@ -640,7 +641,7 @@ function MyCourseDetail() {
                               </div>
                             </div>
                             <div className="d-flex justify-content-center">
-                              <button
+                              {/* <button
                                 onClick={() =>
                                   handleDownload(videosData[0].file_book)
                                 }
@@ -660,7 +661,27 @@ function MyCourseDetail() {
                                   style={{ color: "#ffffff" }}
                                 ></i>
                                 تحميل
-                              </button>
+                              </button> */}
+                                   <Link target="blankk" to={`https://res.cloudinary.com/durjqlivi/image/upload/v1734943495/${videosData[0].course.file_book}`}>
+                                                      <button
+                                                        style={{
+                                                          backgroundColor: "#833988",
+                                                          border: "none",
+                                                          borderRadius: "25px",
+                                                          color: "#fff",
+                                                          fontSize: "12px",
+                                                          height: "35px",
+                                                        }}
+                                                        className="px-3"
+                                                      >
+                                                        {" "}
+                                                        <i
+                                                          className="fa-solid fa-download px-2"
+                                                          style={{ color: "#ffffff" }}
+                                                        ></i>
+                                                        تحميل
+                                                      </button>
+                                                      </Link>
                             </div>
                           </>
                         ) : (

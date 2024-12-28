@@ -1,7 +1,7 @@
 
 import "../Css/auth.css";
 import { Link } from "react-router-dom";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import DeviceDetector from 'device-detector-js';
 import Toastify from "toastify-js";
@@ -42,47 +42,26 @@ function Login() {
       osVersion: device.os.version || 'unknown',
       browser: device.client.name || 'unknown',
       browserVersion: device.client.version || 'unknown',
+      
     };
   };
   
-  const handleAccept = async () => {
-    try {
-      const deviceInfo = getDeviceInfo();
-
-      const res = await axios.post(`${API_URL}/users/login`, {
-        email,
-        password,
-        deviceInfo,
-      });
-  
-      if (res.data.token) {
-        localStorage.setItem('auth', res.data.token);
-        localStorage.setItem('name', res.data.name);
-        localStorage.setItem('id', res.data.id);
-        localStorage.setItem('img', res.data.img);
-  
-        window.location.href = '/';
-      }
-    } catch (err) {
-      if (err.response && err.response.status === 403) {
-        setError('Login not allowed from this device');
-      } else {
-        setError("Invalid email or password");
-      }
-      console.error('Login error:', err);
-    }
-    handleClose();
-  };
-  
-  const handleLogin = async (e) => {
+  const handleAccept= async (e) => {
     e.preventDefault();
   
-    const deviceInfo = getDeviceInfo(); // Generate device info  
+    // Get device info using UAParser
+    const deviceInfo = getDeviceInfo();
+  
     try {
+      // Send device info in headers
       const res = await axios.post(`${API_URL}/users/login`, {
         email,
         password,
-        deviceInfo, // Send device info in the request
+        ip,
+      }, {
+        headers: {
+          'Device-Info': JSON.stringify(deviceInfo), // Send device info as a header
+        },
       });
   
       if (res.data.token) {
@@ -102,6 +81,83 @@ function Login() {
       }
     }
   };
+  const [ip, setIp] = useState("");
+
+  useEffect(() => {
+    // Fetch the IP address as plain text
+    fetch("https://api.ipify.org?format=text")
+      .then((response) => response.text())
+      .then((data) => {
+        setIp(data);
+      })
+      .catch((error) => console.error("Error fetching IP address:", error));
+  }, []);
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+  
+    // Get device info using UAParser
+    const deviceInfo = getDeviceInfo();
+  
+    try {
+      // Send device info in headers
+      const res = await axios.post(`${API_URL}/users/login`, {
+        email,
+        password,
+        ip,
+      }, {
+        headers: {
+          'Device-Info': JSON.stringify(deviceInfo), // Send device info as a header
+        },
+      });
+  
+      if (res.data.token) {
+        localStorage.setItem('auth', res.data.token);
+        localStorage.setItem('name', res.data.name);
+        localStorage.setItem('id', res.data.id);
+        localStorage.setItem('img', res.data.img);
+  
+        window.location.href = '/';
+      }
+    } catch (err) {
+      console.error("Login error:", err);
+      if (err.response && err.response.status === 403) {
+        setError('Login not allowed from this device');
+      } else {
+        setError("Invalid email or password");
+      }
+    }
+  };
+  
+  
+  // const handleLogin = async (e) => {
+  //   e.preventDefault();
+  
+  //   const deviceInfo = getDeviceInfo(); // Generate device info  
+  //   try {
+  //     const res = await axios.post(`${API_URL}/users/login`, {
+  //       email,
+  //       password,
+  //       deviceInfo, // Send device info in the request
+  //     });
+  
+  //     if (res.data.token) {
+  //       localStorage.setItem('auth', res.data.token);
+  //       localStorage.setItem('name', res.data.name);
+  //       localStorage.setItem('id', res.data.id);
+  //       localStorage.setItem('img', res.data.img);
+  
+  //       window.location.href = '/';
+  //     }
+  //   } catch (err) {
+  //     console.error("Login error:", err);
+  //     if (err.response && err.response.status === 403) {
+  //       setError('Login not allowed from this device');
+  //     } else {
+  //       setError("Invalid email or password");
+  //     }
+  //   }
+  // };
   
   
   // const handleAccept = async () => {
