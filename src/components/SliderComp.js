@@ -62,32 +62,23 @@ function SliderComp() {
             <div className="slide-item" key={slide.id}>
               {slide.slider_img ? (
                 <img
-                  srcSet={
-                    slide.slider_img
-                      ? `https://res.cloudinary.com/durjqlivi/${slide.slider_img}?w=800&f_auto&q_auto 800w,
-                      https://res.cloudinary.com/durjqlivi/${slide.slider_img}?w=1600&f_auto&q_auto 1600w`
-                      : "https://example.com/placeholder.jpg"
-                  }
-                  src={
-                    slide.slider_img
-                      ? `https://res.cloudinary.com/durjqlivi/${slide.slider_img}?f_auto&q_auto`
-                      : "https://example.com/placeholder.jpg"
-                  }
+                  srcSet={`https://res.cloudinary.com/durjqlivi/${slide.slider_img}?w=800&f_auto&q_auto 800w,
+            https://res.cloudinary.com/durjqlivi/${slide.slider_img}?w=1600&f_auto&q_auto 1600w`}
+                  src={`https://res.cloudinary.com/durjqlivi/${slide.slider_img}?f_auto&q_auto`}
                   sizes="(max-width: 768px) 100vw, 50vw"
-                  alt="slider img"
+                  alt={slide.title || "slider img"}
                   className="img_home"
                   decoding="async"
                   loading="lazy"
                 />
               ) : (
                 <img
-                srcSet={`https://res.cloudinary.com/durjqlivi/${slide.img}?w=800&f_auto&q_auto 800w, https://res.cloudinary.com/durjqlivi/${slide.img}?w=1600&f_auto&q_auto 1600w`}
-                sizes="(max-width: 768px) 100vw, 50vw"
-                alt="slider img"
-                className="img_home"
-                decoding="async"
-                loading="lazy"
-              />
+                  src="https://example.com/placeholder.jpg"
+                  alt="Default placeholder"
+                  className="img_home"
+                  decoding="async"
+                  loading="lazy"
+                />
               )}
 
               <div className="overlay">

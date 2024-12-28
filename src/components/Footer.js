@@ -58,7 +58,7 @@ function Footer() {
                 </Link>
               </div>
               <div className="col-lg-3 col-md-3-col-sm-12">
-              <img src={require("../assets/ba9ma.png")} alt="" className="img-fluid ba9ma_footer" loading="lazy"/>         
+              <img src={require("../assets/ba9ma.webp")} alt="" className="img-fluid ba9ma_footer" loading="lazy"/>         
                    </div>
               
             </div>

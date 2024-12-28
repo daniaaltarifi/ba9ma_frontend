@@ -44,26 +44,21 @@ function Home() {
     };
 
     fetchData();
-    fetchAbout(); 
+    fetchAbout();
     fetchBasma();
   }, []);
 
   useEffect(() => {
-    if (about.length > 0 && about[0].img) {
-      const imgSrc = `https://res.cloudinary.com/durjqlivi/${about[0].img}?w=1600&f_auto&q_auto`;
-      const link = document.createElement("link");
-      link.rel = "preload";
-      link.href = imgSrc;
-      link.as = "image";
-      link.type = "image/webp"; 
-      link.crossOrigin = "anonymous";
-      document.head.appendChild(link);
-    }
+    const preloadImage = document.createElement("link");
+    preloadImage.rel = "preload";
+    preloadImage.as = "image";
+    preloadImage.href = "https://res.cloudinary.com/durjqlivi/Basma_Academy/kmg1us6gsvfd1kt2w2be?w=800&f_auto&q_auto:eco";
+    preloadImage.crossOrigin = "anonymous";
+    document.head.appendChild(preloadImage);
   }, [about]);
 
   return (
     <>
-   
       <div
         className="container text-center about-section"
         style={{ overflowX: "hidden" }}
@@ -76,8 +71,13 @@ function Home() {
             </div>
             <div className="col-lg-7 col-md-6 col-sm-12 d-flex justify-content-md-center align-items-center">
                 <img
-                  srcSet={`https://res.cloudinary.com/durjqlivi/${abou.img}?w=400&f_auto&q_auto 400w, https://res.cloudinary.com/durjqlivi/${abou.img}?w=800&f_auto&q_auto 800w, https://res.cloudinary.com/durjqlivi/${abou.img}?w=1600&f_auto&q_auto 1600w`}
+                  srcSet={`
+                  https://res.cloudinary.com/durjqlivi/Basma_Academy/${abou.img}?w=400&f_auto&q_auto:eco 400w,
+                  https://res.cloudinary.com/durjqlivi/Basma_Academy/${abou.img}?w=800&f_auto&q_auto:eco 800w,
+                  https://res.cloudinary.com/durjqlivi/Basma_Academy/${abou.img}?w=1600&f_auto&q_auto:eco 1600w
+                `}
                   sizes="(max-width: 768px) 100vw, 50vw"
+                  src="https://res.cloudinary.com/durjqlivi/Basma_Academy/kmg1us6gsvfd1kt2w2be?w=800&f_auto&q_auto:eco"
                   alt="slider img"
                   className="about_img"
                   decoding="async"

@@ -184,7 +184,7 @@ useEffect(() => {
                 >
                   <div className="card card_cont">
                     <img
-                      src={require("../assets/course.png")}
+                      src={require("../assets/course.webp")}
                       className="card-img-top img-fluid card_img"
                       alt="library"
                       loading="lazy"
