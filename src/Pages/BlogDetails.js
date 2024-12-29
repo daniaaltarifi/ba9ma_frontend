@@ -16,7 +16,6 @@ function BlogDetails() {
   const [lastThreeBlogs, setLastThreeBlogs] = useState([]);
   const [tags, setTags] = useState([]);
   const [commentBlogs, setCommentBlogs] = useState([]);
-  const navigate = useNavigate();
   const { id } = useParams();
   useEffect(() => {
     const fetchBlogDetails = async () => {

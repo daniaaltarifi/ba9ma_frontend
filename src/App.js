@@ -10,28 +10,12 @@ import LandingPage from "./Pages/LandingPage.js";
 import Courses from "./Pages/Courses.js";
 
 import Footer from "./components/Footer.js";
-// import CourseDetails from "./Pages/CourseDetails.js";
-// import WhoWeAre from "./Pages/WhoWeAre.js";
+import WhoWeAre from "./Pages/WhoWeAre.js";
 import Blogs from "./Pages/Blogs.js";
-// import BlogDetails from "./Pages/BlogDetails.js";
-// import CardPrice from "./Pages/CardPrice.js";
-// import SignUp from "./Pages/SignUp.js";
-// import Login from "./Pages/Login.js";
-// import Profile from "./Pages/Profile.js";
-// import ContactUs from "./Pages/ContactUs.js";
-// import Library from './Pages/Library.js';
-// import MyCourses from "./Pages/MyCourses.js";
 import { UserProvider } from "./UserContext";
-
-// import ForgotPassword from "./Pages/ForgotPassword.js";
-// import ResetPassword from "./Pages/ResetPassword.js";
-// import MyCourseDetail from "./Pages/MyCourseDetail.js";
 // export const API_URL = "http://localhost:6060";
 export const API_URL='https://backendba9ma.ba9maonline.com'
-// const Courses = React.lazy(() => import("./Pages/Courses.js"));
 const CourseDetails = React.lazy(() => import("./Pages/CourseDetails.js"));
-const WhoWeAre = React.lazy(() => import("./Pages/WhoWeAre.js"));
-// const Blogs = React.lazy(() => import("./Pages/Blogs.js"));
 const BlogDetails = React.lazy(() => import("./Pages/BlogDetails.js"));
 const CardPrice = React.lazy(() => import("./Pages/CardPrice.js"));
 const SignUp = React.lazy(() => import("./Pages/SignUp.js"));

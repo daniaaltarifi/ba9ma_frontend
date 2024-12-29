@@ -53,15 +53,15 @@ function SliderComp() {
   };
 
   return (
-    <div>
-      {loading ? (
-        <div className="loading-spinner">Loading...</div>
-      ) : (
+    // <div>
+    //   {loading ? (
+    //     <div className="loading-spinner">Loading...</div>
+    //   ) : (
         <Slider {...settings} style={{ overflow: "hidden" }}>
+        <div className="fixed_image_slider">
           {slider.map((slide) => (
-            <div className="slide-item" key={slide.id}>
-              {slide.slider_img ? (
-                <img
+            <div className={`slide-item `}>
+              <img
                   srcSet={`https://res.cloudinary.com/durjqlivi/${slide.slider_img}?w=800&f_auto&q_auto 800w,
             https://res.cloudinary.com/durjqlivi/${slide.slider_img}?w=1600&f_auto&q_auto 1600w`}
                   src={`https://res.cloudinary.com/durjqlivi/${slide.slider_img}?f_auto&q_auto`}
@@ -71,29 +71,39 @@ function SliderComp() {
                   decoding="async"
                   loading="lazy"
                 />
-              ) : (
-                <img
-                  src="https://example.com/placeholder.jpg"
-                  alt="Default placeholder"
-                  className="img_home"
-                  decoding="async"
-                  loading="lazy"
-                />
-              )}
-
-              <div className="overlay">
+  
+              <div className="overlay" key={slide.id}>
                 <div className="overlay-content">
+                  {slide.img ? (
+                    <img
+                      src={`https://res.cloudinary.com/durjqlivi/${slide.img}`}
+                      alt={slide.title}
+                      height={"20%"}
+                      loading="lazy"
+                      width={"20%"}
+                    />
+                  ) : (
+                    <div className="placeholder-image">
+                      <p></p>
+                    </div>
+                  )}{" "}
                   <h1 className="title_of_slidercomp">{slide.title}</h1>
-                  <p className="paragraph_slider">
-                    {slide.descr || "نحن هنا دائمًا لمساعدتك!"}
-                  </p>
+                  <p className="paragraph_slider">{slide.descr}</p>
+                  <button 
+    className={`btn btn-s purple_btn ${!slide.btn_name ? 'hidden_btn' : ''}`} 
+    onClick={() => handleOrderCardBtn(slide.page)}
+    style={{ display: slide.btn_name ? 'inline-block' : 'none' }}
+  >
+    {slide.btn_name}
+  </button>
+  
                 </div>
               </div>
             </div>
           ))}
+      
+        </div>
         </Slider>
-      )}
-    </div>
   );
 }
 <link

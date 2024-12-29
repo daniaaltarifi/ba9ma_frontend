@@ -28,7 +28,7 @@ function MyCourseDetail() {
   const [teacherId, settecherId] = useState(null);
   const [studentCount, setStudentCount] = useState(0);
   const [lessonCounts, setLessonCounts] = useState(0);
-  const [student_teacherCount, setstudent_teacherCount] = useState(0);
+  // const [student_teacherCount, setstudent_teacherCount] = useState(0);
   const [courseId, setcourseId] = useState(null);
   const [show, setShow] = useState(false); // State for controlling modal visibility
   const { user, logout } = useContext(UserContext);
@@ -81,21 +81,7 @@ function MyCourseDetail() {
     // fetchCourseUsers()
     fetchCommentCourses();
   }, []);
-  const handleDownload = async (fileName) => {
-    try {
-      const response = await axios.get(`http://localhost:8080/${fileName}`, {
-        responseType: "blob", // Important: responseType blob for downloading files
-      });
-      const url = window.URL.createObjectURL(new Blob([response.data]));
-      const link = document.createElement("a");
-      link.href = url;
-      link.setAttribute("download", fileName);
-      document.body.appendChild(link);
-      link.click();
-    } catch (error) {
-      console.error("Error downloading file:", error);
-    }
-  };
+ 
   useEffect(() => {
     const fetchVideosData = async () => {
       try {
@@ -339,27 +325,27 @@ function MyCourseDetail() {
     }
   }, [courseId]);
 
-  const TeacherStudentCount = async () => {
-    if (teacherId) {
-      try {
-        const response = await axios.get(
-          `http://localhost:8080/teacher/student-counts/${teacherId}`
-        );
-        const data = response.data;
-        if (data && data.student_count !== undefined) {
-          setstudent_teacherCount(data.student_count); // Set the course count from the response
-        }
-      } catch (error) {
-        console.error("Error fetching student count:", error);
-      }
-    }
-  };
+  // const TeacherStudentCount = async () => {
+  //   if (teacherId) {
+  //     try {
+  //       const response = await axios.get(
+  //         `http://localhost:8080/teacher/student-counts/${teacherId}`
+  //       );
+  //       const data = response.data;
+  //       if (data && data.student_count !== undefined) {
+  //         setstudent_teacherCount(data.student_count); // Set the course count from the response
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching student count:", error);
+  //     }
+  //   }
+  // };
 
-  useEffect(() => {
-    if (teacherId) {
-      TeacherStudentCount();
-    }
-  }, [teacherId]);
+  // useEffect(() => {
+  //   if (teacherId) {
+  //     TeacherStudentCount();
+  //   }
+  // }, [teacherId]);
 
   const handleClose = () => setShow(false);
 
@@ -552,9 +538,9 @@ function MyCourseDetail() {
             </div>
             <div className="col-lg-6 col-md-6 cl-sm-12 ">
               <div className="dep_teacher_coursedetails ">
-                <p className="dep_coursedetaile">{course.Department.title}</p>
+                <p className="dep_coursedetaile">{course.Department?.title}</p>
                 <p className="teacher_coursedetails">
-                  {course.teacher.teacher_name}
+                  {course.teacher?.teacher_name}
                 </p>
               </div>
               <h1 className="title_coursedetails">{course.subject_name}</h1>
@@ -641,27 +627,6 @@ function MyCourseDetail() {
                               </div>
                             </div>
                             <div className="d-flex justify-content-center">
-                              {/* <button
-                                onClick={() =>
-                                  handleDownload(videosData[0].file_book)
-                                }
-                                style={{
-                                  backgroundColor: "#833988",
-                                  border: "none",
-                                  borderRadius: "25px",
-                                  color: "#fff",
-                                  fontSize: "12px",
-                                  height: "35px",
-                                }}
-                                className="px-3"
-                              >
-                                {" "}
-                                <i
-                                  className="fa-solid fa-download px-2"
-                                  style={{ color: "#ffffff" }}
-                                ></i>
-                                تحميل
-                              </button> */}
                                    <Link target="blankk" to={`https://res.cloudinary.com/durjqlivi/image/upload/v1734943495/${videosData[0].course.file_book}`}>
                                                       <button
                                                         style={{
@@ -1052,7 +1017,7 @@ function MyCourseDetail() {
                               {courseCount}مادة{" "}
                             </p>
                           </div>
-                          <div className="d-flex">
+                          {/* <div className="d-flex">
                             <i
                               className="fa-solid fa-graduation-cap card_icon ps-2"
                               style={{ color: "#F57D20" }}
@@ -1061,7 +1026,7 @@ function MyCourseDetail() {
                               {" "}
                               {student_teacherCount} طالب{" "}
                             </p>
-                          </div>
+                          </div> */}
                           <div className="d-flex">
                             <p>للمتابعة:</p>
                             <Link to="">

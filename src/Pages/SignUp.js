@@ -10,7 +10,7 @@ function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [role, setRole] = useState("student"); // default role
+  const [role, setRole] = useState("Student"); // default role
 
   const [nameError, setNameError] = useState("");
   const [emailError, setEmailError] = useState("");

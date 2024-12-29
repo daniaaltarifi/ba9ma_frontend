@@ -4,16 +4,16 @@
   height: 80vh;
   
 }
-/* .fixed_image_slider {
+.fixed_image_slider {
   position: relative; 
-  background-image: url('../assets/course.png');
+  background-image: url('../assets/course.webp');
   background-size: cover; 
   background-position: center; 
   width: 100%; 
   height: 78vh; 
     background-color: rgba(0, 0, 0, 0.1); 
   background-blend-mode: overlay; 
-} */
+}
 
 .img_home {
   width: 100%; /* Ensures the image width fills its container */

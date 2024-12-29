@@ -74,7 +74,10 @@ function LandingPage() {
 
       {/* Slider Section */}
       <Slider {...settings} style={{ overflow: "hidden" }}>
-      {slider.map((slide) => (
+
+      <div className="fixed_image_slider">
+      </div>    
+        {slider.map((slide) => (
           <div className="slide-item" key={slide.id}>
             <img
               srcSet={`https://res.cloudinary.com/durjqlivi/${slide.slider_img}?w=800&f_auto&q_auto 800w,

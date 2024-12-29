@@ -407,7 +407,7 @@ function Courses() {
 
   return (
     <>
-      <SliderComp slider={slider} />
+      <SliderComp  />
 
       <div className="container courses_margin" id="order-section">
         <div className="row ">

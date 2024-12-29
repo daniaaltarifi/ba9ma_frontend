@@ -12,42 +12,30 @@ function WhoWeAre() {
   const [slider, setSlider] = useState([]);
   const [aboutteacher, setAboutTeacher] = useState([]);
 
-  const fetchBasma = async () => {
+  const fetchData = async (url, setter) => {
     try {
-      const response = await axios.get(
-        `${API_URL}/basmatrainning/basma-trainings/2`
-      );
-      const data = response.data;
-      console.log(data)
-      setBasmaTraining(data);
+      const { data } = await axios.get(url);
+      setter(data);
     } catch (error) {
-      console.log(`Error getting data from frontend: ${error}`);
+      console.error(`Error fetching from ${url}:`, error);
     }
   };
-  const fetchWhoweare = async () => {
-    try {
-      const response = await axios.get(`${API_URL}/WhoWeAre/getWhoweares`);
-      const data = response.data;
-      setWhoweare(data);
-    } catch (error) {
-      console.log(`Error getting data from frontend: ${error}`);
-    }
+  
+  const fetchAllData = async () => {
+    const basmaUrl = `${API_URL}/basmatrainning/basma-trainings/2`;
+    const whoWeAreUrl = `${API_URL}/WhoWeAre/getWhoweares`;
+    const aboutTeacherUrl = `${API_URL}/aboutTeacher/getaboutteacher`;
+  
+    await Promise.all([
+      fetchData(basmaUrl, setBasmaTraining),
+      fetchData(whoWeAreUrl, setWhoweare),
+      fetchData(aboutTeacherUrl, setAboutTeacher),
+    ]);
   };
-  const fetchAboutTeacher = async () => {
-    try {
-      const response = await axios.get(
-        `${API_URL}/aboutTeacher/getaboutteacher`
-      );
-      setAboutTeacher(response.data);
-    } catch (error) {
-      console.error("Error fetching departments:", error);
-    }
-  };
+  
   useEffect(() => {
     window.scrollTo(0, 0);
-    fetchBasma();
-    fetchWhoweare();
-    fetchAboutTeacher();
+    fetchAllData();
   }, []);
 
   const { hash } = useLocation();
