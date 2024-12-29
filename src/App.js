@@ -107,6 +107,7 @@ function App() {
     }
     originalConsoleError.apply(console, args);
   };
+
   // const { user, updateUser, logout } = useAuth();
   const [user, setUser] = useState({
     isLoggedIn: false,

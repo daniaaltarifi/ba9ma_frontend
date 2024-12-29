@@ -58,7 +58,7 @@ function CardPrice() {
       const response = await axios.get(
         `${API_URL}/availablecards/available-cardsbygovermentId/${id}`
       );
-      setSelectedGovernorate(response.data);
+      setSelectedGovernorate(response.data.availableCards);
       setSelectedGovernorateId(id);
     } catch (error) {
       console.error("Error fetching cards:", error);

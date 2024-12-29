@@ -652,7 +652,7 @@ function Courses() {
                               {/* rating here */}
                               <p className="card-text card_dep">
                                 {" "}
-                                {card.Department.title}
+                                {card.Department?.title}
                               </p>
                             </div>
                             <div className="d-flex justify-content-between">
@@ -660,7 +660,7 @@ function Courses() {
                                 {card.subject_name}
                               </p>{" "}
                               <p className=" teacher_name_card">
-                                {card.teacher.teacher_name}
+                                {card.teacher?.teacher_name}
                               </p>
                             </div>
                             <hr style={{ marginTop: "1px" }} />

@@ -1131,7 +1131,7 @@ useEffect(() => {
                                         {comment.name}
                                       </p>
                                       <p className="comment_date_coursedetails">
-                                        {comment.created_date}
+                                        {comment.created_at}
                                       </p>
                                     </div>
                                     <p className="desc_of_teacher_coursedetails">

@@ -77,7 +77,7 @@ function SignUp() {
         confirmPassword,
       });
      
-      if (role === 'student') {
+      if (role === 'Student') {
         window.location.href = "/login"; // Redirect to the login
       } else {
         setError("تم انشاء حساب");
@@ -189,7 +189,7 @@ function SignUp() {
                   value={role}
                   onChange={(e) => setRole(e.target.value)}
                 >
-                  <option value="student">طالب </option>
+                  <option value="Student">طالب </option>
                   <option value="teacher">معلم</option>
                 </select>
                 </div>
