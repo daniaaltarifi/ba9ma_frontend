@@ -51,7 +51,7 @@ function WhoWeAre() {
 
   return (
     <>
-      <SliderComp slider={slider} />
+      <SliderComp/>
       {/* <SliderComp title={title} description={description} /> */}
 
       {/* slider box */}
@@ -65,8 +65,8 @@ function WhoWeAre() {
             </div>
           ))}
         </div>
-        <div className="row d-flex justify-content-center"></div>
       </div>
+      
       {/* End slider box */}
       {/* Our Teachear */}
       <div className="container text-center about-section" id="order-section">
@@ -84,33 +84,32 @@ function WhoWeAre() {
                 loading="lazy"
               />
             </div>
+            <p className="paragraph_who pt-4">{tech.para}</p>
+
           </div>
         ))}
       </div>
       {/* End Our Teachear */}
       <StudentsOpinions />
       {/* some paragraph */}
-      <div className="margin_section">
+      {/* <div className="margin_section">
         <div className="container w-75 pt-4">
           {aboutteacher.map((tech) => (
             <p className="paragraph_who">{tech.para}</p>
           ))}
         </div>
-      </div>
+      </div> */}
       {/* End some paragraph */}
 
-      {basmatrainig.length === 0 ? (
-        <div>Loading...</div> // Display loading state
-      ) : (
-        basmatrainig.map((item) => (
+        {basmatrainig.map((item) => (
           <PurpleBox
             key={item.id} // Unique key for each item
             title={item.title}
             description={item.descr}
             link="/courses" // Adjust link if needed
           />
-        ))
-      )}
+        
+      ))}
     </>
   );
 }

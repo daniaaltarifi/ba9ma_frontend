@@ -88,18 +88,16 @@ function Home() {
       </div>
       {/* End About section */}
       {/* Home Box */}
-      {basmatrainig.length === 0 ? (
-        <div>Loading...</div> // Display loading state
-      ) : (
-        basmatrainig.map((item) => (
+ 
+       {basmatrainig.map((item) => (
           <PurpleBox
             key={item.id} // Unique key for each item
             title={item.title}
             description={item.descr}
             link="/courses" // Adjust link if needed
           />
-        ))
-      )}
+    
+      ))}
       {/* <BoxCont title={title} description={description} linkPage={linkPage} /> */}
 
       {/* FAQ section */}
