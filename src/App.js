@@ -13,7 +13,7 @@ import Footer from "./components/Footer.js";
 import WhoWeAre from "./Pages/WhoWeAre.js";
 import Blogs from "./Pages/Blogs.js";
 import { UserProvider } from "./UserContext";
-// export const API_URL = "http://localhost:6060";
+//  export const API_URL = "http://localhost:6060";
 export const API_URL='https://backendba9ma.ba9maonline.com'
 const CourseDetails = React.lazy(() => import("./Pages/CourseDetails.js"));
 const BlogDetails = React.lazy(() => import("./Pages/BlogDetails.js"));

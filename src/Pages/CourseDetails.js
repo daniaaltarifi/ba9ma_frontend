@@ -562,7 +562,7 @@ useEffect(() => {
           <div className="row ">
             <div className="col-lg-6 col-md-6 col-sm-12 d-flex justify-content-center">
               <img
-              src={`https://res.cloudinary.com/durjqlivi/${course.img}`}
+              src={`https://res.cloudinary.com/dqimsdiht/${course.img}`}
                 alt="coursedetails"
                 className="img-fluid img_coursedetails"
                 loading="lazy"
@@ -639,7 +639,7 @@ useEffect(() => {
                           }
                         >
                           <source
-                            src={`https://res.cloudinary.com/durjqlivi/video/upload/${videosData[0].course.defaultvideo}`} // Assuming first video is default
+                            src={`https://res.cloudinary.com/dqimsdiht/video/upload/${videosData[0].course.defaultvideo}`} // Assuming first video is default
                             type="video/mp4"
                           />
                           Your browser does not support the video tag.
@@ -841,7 +841,7 @@ useEffect(() => {
                                   preload="metadata"
                                 >
                                   <source
-                                    src={`https://res.cloudinary.com/durjqlivi/video/upload/${videosData[currentVideoIndex].url}`}
+                                    src={`https://res.cloudinary.com/dqimsdiht/video/upload/${videosData[currentVideoIndex].url}`}
                                     type="video/mp4"
                                   />
                                   Your browser does not support the video tag.

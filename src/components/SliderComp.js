@@ -62,9 +62,9 @@ function SliderComp() {
           {slider.map((slide) => (
             <div className={`slide-item `}>
               <img
-                  srcSet={`https://res.cloudinary.com/durjqlivi/${slide.slider_img}?w=800&f_auto&q_auto 800w,
-            https://res.cloudinary.com/durjqlivi/${slide.slider_img}?w=1600&f_auto&q_auto 1600w`}
-                  src={`https://res.cloudinary.com/durjqlivi/${slide.slider_img}?f_auto&q_auto`}
+                  srcSet={`https://res.cloudinary.com/dqimsdiht/${slide.slider_img}?w=800&f_auto&q_auto 800w,
+            https://res.cloudinary.com/dqimsdiht/${slide.slider_img}?w=1600&f_auto&q_auto 1600w`}
+                  src={`https://res.cloudinary.com/dqimsdiht/${slide.slider_img}?f_auto&q_auto`}
                   sizes="(max-width: 768px) 100vw, 50vw"
                   alt={slide.title || "slider img"}
                   className="img_home"
@@ -76,7 +76,7 @@ function SliderComp() {
                 <div className="overlay-content">
                   {slide.img ? (
                     <img
-                      src={`https://res.cloudinary.com/durjqlivi/${slide.img}`}
+                      src={`https://res.cloudinary.com/dqimsdiht/${slide.img}`}
                       alt={slide.title}
                       height={"20%"}
                       loading="lazy"

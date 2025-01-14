@@ -209,7 +209,7 @@ function MyCourses() {
               >
                 <div className="card card_cont">
                   <img
-                    src={`https://res.cloudinary.com/durjqlivi/${course.course?.img}`}
+                    src={`https://res.cloudinary.com/dqimsdiht/${course.course?.img}`}
                     className="card-img-top img-fluid card_img"
                     alt={course.course?.subject_name}
                     loading="lazy"

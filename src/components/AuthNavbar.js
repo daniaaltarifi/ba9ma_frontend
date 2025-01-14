@@ -18,7 +18,7 @@ function AuthNavbar() {
               <li><Link to={`/profile/${userId}`} className="dropdown-item">حسابي</Link></li>
               <li><Link to="/login" onClick={logout} className="dropdown-item">تسجيل الخروج</Link></li>
             </ul>
-            <img src={`https://res.cloudinary.com/durjqlivi/image/upload/v1734555243/${img}` || img} alt="profile img" className="img-fluid img_icon_navbar"loading="lazy" />
+            <img src={`https://res.cloudinary.com/dqimsdiht/image/upload/v1734555243/${img}` || img} alt="profile img" className="img-fluid img_icon_navbar"loading="lazy" />
           </div>
         </>
       ) : (

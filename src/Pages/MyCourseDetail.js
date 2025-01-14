@@ -530,7 +530,7 @@ function MyCourseDetail() {
           <div className="row ">
             <div className="col-lg-6 col-md-6 col-sm-12 d-flex justify-content-center">
               <img
-                src={`https://res.cloudinary.com/durjqlivi/${course.img}`}
+                src={`https://res.cloudinary.com/dqimsdiht/${course.img}`}
                 alt="coursedetails"
                 className="img-fluid img_coursedetails"
                 loading="lazy"
@@ -609,7 +609,7 @@ function MyCourseDetail() {
                           }
                         >
                           <source
-                            src={`https://res.cloudinary.com/durjqlivi/video/upload/${videosData[0].course.defaultvideo}`} // Assuming first video is default
+                            src={`https://res.cloudinary.com/dqimsdiht/video/upload/${videosData[0].course.defaultvideo}`} // Assuming first video is default
                             type="video/mp4"
                           />
                           Your browser does not support the video tag.
@@ -627,7 +627,7 @@ function MyCourseDetail() {
                               </div>
                             </div>
                             <div className="d-flex justify-content-center">
-                                   <Link target="blankk" to={`https://res.cloudinary.com/durjqlivi/image/upload/v1734943495/${videosData[0].course.file_book}`}>
+                                   <Link target="blankk" to={`https://res.cloudinary.com/dqimsdiht/image/upload/v1734943495/${videosData[0].course.file_book}`}>
                                                       <button
                                                         style={{
                                                           backgroundColor: "#833988",
@@ -808,7 +808,7 @@ function MyCourseDetail() {
                                   preload="metadata"
                                 >
                                   <source
-                                    src={`https://res.cloudinary.com/durjqlivi/video/upload/${videosData[currentVideoIndex].url}`}
+                                    src={`https://res.cloudinary.com/dqimsdiht/video/upload/${videosData[currentVideoIndex].url}`}
                                     type="video/mp4"
                                   />
                                   Your browser does not support the video tag.
@@ -993,7 +993,7 @@ function MyCourseDetail() {
                       <div className="row">
                         <div className="col-lg-3 col-md-3 col-sm-12">
                           <img
-                            src={`https://res.cloudinary.com/durjqlivi/${course.img}`}
+                            src={`https://res.cloudinary.com/dqimsdiht/${course.img}`}
                             alt="teacher img"
                             height={"80vh"}
                             width={"80vh"}

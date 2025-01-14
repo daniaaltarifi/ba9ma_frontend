@@ -4,6 +4,7 @@ import StudentsOpinions from "../components/StudentsOpinions";
 import PurpleBox from "../components/PurpleBox";
 import axios from "axios";
 import { API_URL } from "../App";
+import { Link } from "react-router-dom";
 
 function Home() {
   const [faq, setFaq] = useState([]);
@@ -53,7 +54,7 @@ function Home() {
     preloadImage.rel = "preload";
     preloadImage.as = "image";
     preloadImage.href =
-      "https://res.cloudinary.com/durjqlivi/Basma_Academy/kmg1us6gsvfd1kt2w2be?w=800&f_auto&q_auto:eco";
+      "https://res.cloudinary.com/dqimsdiht/Basma_Academy/kmg1us6gsvfd1kt2w2be?w=800&f_auto&q_auto:eco";
     preloadImage.crossOrigin = "anonymous";
     document.head.appendChild(preloadImage);
   }, [about]);
@@ -70,33 +71,43 @@ function Home() {
               <h2 className="about_title">{abou.title}</h2>
               <p className="p_about">{abou.descr}</p>
             </div>
-           <div className="col-lg-7 col-md-6 col-sm-12 d-flex justify-content-md-center align-items-center">
-           <img
+            <div className="col-lg-7 col-md-6 col-sm-12 d-flex justify-content-md-center align-items-center">
+              <img
                 srcSet={`
-                  https://res.cloudinary.com/durjqlivi/${abou.img}?w=400&f_auto&q_auto:eco 400w,
+                  https://res.cloudinary.com/dqimsdiht/${abou.img}?w=400&f_auto&q_auto:eco 400w,
                 `}
                 sizes="(max-width: 768px) 100vw, 50vw"
-                src="https://res.cloudinary.com/durjqlivi/Basma_Academy/kmg1us6gsvfd1kt2w2be?w=800&f_auto&q_auto:eco"
+                src="https://res.cloudinary.com/dqimsdiht/Basma_Academy/kmg1us6gsvfd1kt2w2be?w=800&f_auto&q_auto:eco"
                 alt="slider img"
                 className="about_img"
                 decoding="async"
                 loading="eager"
-              />
-          </div>
+              />
+            </div>
           </div>
         ))}
       </div>
       {/* End About section */}
       {/* Home Box */}
- 
-       {basmatrainig.map((item) => (
-          <PurpleBox
-            key={item.id} // Unique key for each item
-            title={item.title}
-            description={item.descr}
-            link="/courses" // Adjust link if needed
-          />
-    
+
+      {basmatrainig.map((item) => (
+        // <PurpleBox
+        //   key={item.id} // Unique key for each item
+        //   title={item.title}
+        //   description={item.descr}
+        //   link="/courses" // Adjust link if needed
+        // />
+        <section className="margin_section">
+          <div className="container text-center home_box" key={item.id}>
+            <h2 className="h_home_box">{item.title}</h2>
+            <p className="p_home_box"> {item.descr}</p>
+            <Link to={"/courses"}>
+              <button type="button" className="btn btn-light click_here_btn">
+                اضغط هنا
+              </button>
+            </Link>
+          </div>
+        </section>
       ))}
       {/* <BoxCont title={title} description={description} linkPage={linkPage} /> */}
 

@@ -4,7 +4,7 @@ import "../Css/whoweare.css";
 import StudentsOpinions from "../components/StudentsOpinions.js";
 import PurpleBox from "../components/PurpleBox.js";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { API_URL } from "../App.js";
 function WhoWeAre() {
   const [basmatrainig, setBasmaTraining] = useState([]);
@@ -20,19 +20,19 @@ function WhoWeAre() {
       console.error(`Error fetching from ${url}:`, error);
     }
   };
-  
+
   const fetchAllData = async () => {
     const basmaUrl = `${API_URL}/basmatrainning/basma-trainings/2`;
     const whoWeAreUrl = `${API_URL}/WhoWeAre/getWhoweares`;
     const aboutTeacherUrl = `${API_URL}/aboutTeacher/getaboutteacher`;
-  
+
     await Promise.all([
       fetchData(basmaUrl, setBasmaTraining),
       fetchData(whoWeAreUrl, setWhoweare),
       fetchData(aboutTeacherUrl, setAboutTeacher),
     ]);
   };
-  
+
   useEffect(() => {
     window.scrollTo(0, 0);
     fetchAllData();
@@ -51,7 +51,7 @@ function WhoWeAre() {
 
   return (
     <>
-      <SliderComp/>
+      <SliderComp />
       {/* <SliderComp title={title} description={description} /> */}
 
       {/* slider box */}
@@ -66,7 +66,7 @@ function WhoWeAre() {
           ))}
         </div>
       </div>
-      
+
       {/* End slider box */}
       {/* Our Teachear */}
       <div className="container text-center about-section" id="order-section">
@@ -78,14 +78,13 @@ function WhoWeAre() {
             </div>{" "}
             <div className="col-lg-7 col-md-6 col-sm-12 ">
               <img
-              src={`https://res.cloudinary.com/durjqlivi/${tech.img}`}
+                src={`https://res.cloudinary.com/dqimsdiht/${tech.img}`}
                 alt="about"
                 className="about_img img-fluid "
                 loading="lazy"
               />
             </div>
             <p className="paragraph_who pt-4">{tech.para}</p>
-
           </div>
         ))}
       </div>
@@ -101,14 +100,24 @@ function WhoWeAre() {
       </div> */}
       {/* End some paragraph */}
 
-        {basmatrainig.map((item) => (
-          <PurpleBox
-            key={item.id} // Unique key for each item
-            title={item.title}
-            description={item.descr}
-            link="/courses" // Adjust link if needed
-          />
-        
+      {basmatrainig.map((item) => (
+        // <PurpleBox
+        //   key={item.id} // Unique key for each item
+        //   title={item.title}
+        //   description={item.descr}
+        //   ses" // Adjust link if needed
+        // />link="/cour
+        <section className="margin_section">
+          <div className="container text-center home_box">
+            <h2 className="h_home_box">{item.title}</h2>
+            <p className="p_home_box"> {item.descr}</p>
+            <Link to={"/courses"}>
+              <button type="button" className="btn btn-light click_here_btn">
+                اضغط هنا
+              </button>
+            </Link>
+          </div>
+        </section>
       ))}
     </>
   );

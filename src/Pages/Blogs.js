@@ -210,7 +210,7 @@ function Blogs() {
                               }}
                             >
                               <img
-                                src={`https://res.cloudinary.com/durjqlivi/${blog.img}`}
+                                src={`https://res.cloudinary.com/dqimsdiht/${blog.img}`}
                                 alt={blog.title}
                                 loading="lazy"
                               />
@@ -263,7 +263,7 @@ function Blogs() {
                               }}
                             >
                               <img
-                                src={`https://res.cloudinary.com/durjqlivi/${blog.img}`}
+                                src={`https://res.cloudinary.com/dqimsdiht/${blog.img}`}
                                 alt={blog.title}
                                 loading="lazy"
                                 height={"50px"}
@@ -292,7 +292,7 @@ function Blogs() {
                       <div className="row g-0">
                         <div className="col-lg-4 col-md-4 col-sm-12 img_col_blogs">
                           <img
-                            src={`https://res.cloudinary.com/durjqlivi/${blog.img}`}
+                            src={`https://res.cloudinary.com/dqimsdiht/${blog.img}`}
                             className="img-fluid img_blog"
                             alt="blog"
                             loading="lazy"
@@ -381,7 +381,7 @@ function Blogs() {
                 >
                   <div className="categ_lastblog_cont">
                     <img
-                      src={`https://res.cloudinary.com/durjqlivi/${lastthreeblogs.img}`}
+                      src={`https://res.cloudinary.com/dqimsdiht/${lastthreeblogs.img}`}
                       alt=""
                       className="img-fluid img_last_blog"
                       loading="lazy"

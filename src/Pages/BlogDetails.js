@@ -128,7 +128,7 @@ function BlogDetails() {
           <div className="row justify-content-center align-items-center">
             <div className="col-lg-6 col-md-6 cl-sm-12 d-flex justify-content-center">
               <img
-                src={`https://res.cloudinary.com/durjqlivi/${img}`}
+                src={`https://res.cloudinary.com/dqimsdiht/${img}`}
                 alt="coursedetails"
                 className="img-fluid img_blogdetails"
                 loading="lazy"
@@ -246,7 +246,7 @@ function BlogDetails() {
                   >
                     <div className="categ_lastblog_cont">
                       <img
-                        src={`https://res.cloudinary.com/durjqlivi/${lastthreeblogs.img}`}
+                        src={`https://res.cloudinary.com/dqimsdiht/${lastthreeblogs.img}`}
                         alt=""
                         className="img-fluid img_last_blog"
                         loading="lazy"

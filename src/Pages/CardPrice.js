@@ -111,7 +111,7 @@ function CardPrice() {
               <div className="col-lg-3 col-md-6 col-sm-12 ">
                 <div className="box_purple__orderby_cardprice">
                   <img
-                    src={`https://res.cloudinary.com/durjqlivi/${step.img}`}
+                    src={`https://res.cloudinary.com/dqimsdiht/${step.img}`}
                     alt="www icon"
                     className="img-fluid icon_orderby_cardprice"
                     loading="lazy"

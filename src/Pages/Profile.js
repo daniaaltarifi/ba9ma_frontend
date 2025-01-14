@@ -32,7 +32,7 @@ function Profile() {
             confirmPassword: ''
           });
           // Set the image URL from the profile data
-          setImageUrl(`https://res.cloudinary.com/durjqlivi/${response.data.img}`);
+          setImageUrl(`https://res.cloudinary.com/dqimsdiht/${response.data.img}`);
         })
         .catch(error => {
           console.error('There was an error fetching the profile!', error);
@@ -68,7 +68,7 @@ const handleUpdate = async () => {
       }
     });
     // Update the image URL with the new image URL from the server
-      setImageUrl(`https://res.cloudinary.com/durjqlivi/${response.data.img}`);
+      setImageUrl(`https://res.cloudinary.com/dqimsdiht/${response.data.img}`);
 setSuccessMessage('تم تعديل حسابك');
     updateUser(profile.name,userId,response.data.img)
 setProfile(prevState => ({
