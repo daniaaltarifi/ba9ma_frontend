@@ -62,7 +62,7 @@ function Footer() {
                    </div>
               
             </div>
-            <h5 className="text-center copywrite">جميع الحقوق مجفوطة لدى شركة بصمة</h5>
+            <h5 className="text-center copywrite">جميع الحقوق محفوظة لدى شركة بصمة</h5>
           </div>
         </div>
       </footer>

@@ -1027,7 +1027,7 @@ useEffect(() => {
                       <div className="row">
                         <div className="col-lg-3 col-md-3 col-sm-12">
                           <img
-                            src={`${course.teacher.img}`}
+                            src={`https://res.cloudinary.com/dqimsdiht/${course.teacher.img}`}
                             alt="teacher img"
                             height={"80vh"}
                             width={"80vh"}
