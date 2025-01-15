@@ -21,7 +21,6 @@ function Home() {
         console.log(`Error getting data from frontend: ${error}`);
       }
     };
-
     const fetchAbout = async () => {
       try {
         const response = await axios.get(`${API_URL}/abouts/getabout`);
@@ -31,7 +30,6 @@ function Home() {
         console.log(`Error getting data from frontend: ${error}`);
       }
     };
-
     const fetchBasma = async () => {
       try {
         const response = await axios.get(
@@ -43,7 +41,6 @@ function Home() {
         console.log(`Error getting data from frontend: ${error}`);
       }
     };
-
     fetchData();
     fetchAbout();
     fetchBasma();
