@@ -71,7 +71,7 @@ function Home() {
               <h2 className="about_title">{abou.title}</h2>
               <p className="p_about">{abou.descr}</p>
             </div>
-            <div className="col-lg-7 col-md-6 col-sm-12 d-flex justify-content-md-center align-items-center">
+            <div className="col-lg-7 col-md-6 col-sm-12 ">
               <img
                 srcSet={`
                   https://res.cloudinary.com/dqimsdiht/${abou.img}?w=400&f_auto&q_auto:eco 400w,
@@ -79,7 +79,7 @@ function Home() {
                 sizes="(max-width: 768px) 100vw, 50vw"
                 src="https://res.cloudinary.com/dqimsdiht/Basma_Academy/kmg1us6gsvfd1kt2w2be?w=800&f_auto&q_auto:eco"
                 alt="slider img"
-                className="about_img"
+                className="about_img img-fluid"
                 decoding="async"
                 loading="eager"
               />
