@@ -627,7 +627,7 @@ function MyCourseDetail() {
                               </div>
                             </div>
                             <div className="d-flex justify-content-center">
-                                   <Link target="blankk" to={`https://res.cloudinary.com/dqimsdiht/image/upload/v1734943495/${videosData[0].course.file_book}`}>
+                                   <Link target="blankk" to={`https://res.cloudinary.com/dqimsdiht/image/upload/v1736931832/${videosData[0].course.file_book}`}>
                                                       <button
                                                         style={{
                                                           backgroundColor: "#833988",
