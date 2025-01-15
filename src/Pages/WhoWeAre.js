@@ -90,16 +90,6 @@ function WhoWeAre() {
       </div>
       {/* End Our Teachear */}
       <StudentsOpinions />
-      {/* some paragraph */}
-      {/* <div className="margin_section">
-        <div className="container w-75 pt-4">
-          {aboutteacher.map((tech) => (
-            <p className="paragraph_who">{tech.para}</p>
-          ))}
-        </div>
-      </div> */}
-      {/* End some paragraph */}
-
       {basmatrainig &&
       Array.isArray(basmatrainig) &&
       basmatrainig.length > 0 ? (
