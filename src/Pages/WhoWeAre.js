@@ -100,25 +100,20 @@ function WhoWeAre() {
       </div> */}
       {/* End some paragraph */}
 
-      {basmatrainig.map((item) => (
-        // <PurpleBox
-        //   key={item.id} // Unique key for each item
-        //   title={item.title}
-        //   description={item.descr}
-        //   ses" // Adjust link if needed
-        // />link="/cour
-        <section className="margin_section">
-          <div className="container text-center home_box">
-            <h2 className="h_home_box">{item.title}</h2>
-            <p className="p_home_box"> {item.descr}</p>
-            <Link to={"/courses"}>
-              <button type="button" className="btn btn-light click_here_btn">
-                اضغط هنا
-              </button>
-            </Link>
-          </div>
-        </section>
-      ))}
+      {basmatrainig &&
+      Array.isArray(basmatrainig) &&
+      basmatrainig.length > 0 ? (
+        basmatrainig.map((item) => (
+          <PurpleBox
+            key={item.id}
+            title={item.title}
+            description={item.descr}
+            link="/courses"
+          />
+        ))
+      ) : (
+        <p>No Courses available</p> // Show a message when no items are available
+      )}
     </>
   );
 }

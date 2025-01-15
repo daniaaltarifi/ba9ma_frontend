@@ -90,26 +90,20 @@ function Home() {
       {/* End About section */}
       {/* Home Box */}
 
-      {basmatrainig.map((item) => (
-        // <PurpleBox
-        //   key={item.id} // Unique key for each item
-        //   title={item.title}
-        //   description={item.descr}
-        //   link="/courses" // Adjust link if needed
-        // />
-        <section className="margin_section">
-          <div className="container text-center home_box" key={item.id}>
-            <h2 className="h_home_box">{item.title}</h2>
-            <p className="p_home_box"> {item.descr}</p>
-            <Link to={"/courses"}>
-              <button type="button" className="btn btn-light click_here_btn">
-                اضغط هنا
-              </button>
-            </Link>
-          </div>
-        </section>
-      ))}
-      {/* <BoxCont title={title} description={description} linkPage={linkPage} /> */}
+      {basmatrainig &&
+      Array.isArray(basmatrainig) &&
+      basmatrainig.length > 0 ? (
+        basmatrainig.map((item) => (
+          <PurpleBox
+            key={item.id}
+            title={item.title}
+            description={item.descr}
+            link="/courses"
+          />
+        ))
+      ) : (
+        <p>No Courses available</p> 
+      )}
 
       {/* FAQ section */}
       <section className="margin_section" style={{ overflowX: "hidden" }}>
